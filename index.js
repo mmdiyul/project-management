@@ -6,9 +6,9 @@ const db = require('./configs/database.conf').URL
 const port = process.env.PORT || 3300
 // const database = require('./configs/database.conf')
 const app = express()
-const rolesRoute = require('./routes/api/roles/roles.route')
+const api = require('./routes/api/index')
 
-// database.connect
+// database.connectDatabase
 
 mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({ type: 'application/json' }))
 
-app.use('/roles', rolesRoute)
+app.use('/api', api)
 app.get('/', (req, res) => {
     res.send('It Works!')
 })

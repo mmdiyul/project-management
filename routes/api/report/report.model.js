@@ -18,4 +18,4 @@ const reportSchema = Schema({
   }
 }, { timestamp: true })
 
-module.exports = model('Project', reportSchema, 'project')
+module.exports = model('Report', reportSchema, 'report')
