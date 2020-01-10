@@ -1,33 +1,33 @@
-let Roles = require('./roles.model')
+let Fitur = require('./fitur.model')
 
 module.exports = {
   findAll: (req, res) => {
-    Roles.find()
-      .then(roles => res.json(roles))
+    Fitur.find()
+      .then(fitur => res.json(fitur))
       .catch(error => console.log(error))
   },
   findById: (req, res) => {
-    Roles.findById(req.params.id)
-      .then(roles => res.json(roles))
+    Fitur.findById(req.params.id)
+      .then(fitur => res.json(fitur))
       .catch(error => console.log(error))
   },
   updateById: (req, res) => {
-    Roles.findOneAndUpdate(
+    Fitur.findOneAndUpdate(
       {_id: req.params.id},
       {$set: req.body},
       {new: true}
     )
-      .then(roles => res.json(roles))
+      .then(fitur => res.json(fitur))
       .catch(error => console.log(error))
   },
   insert: (req, res) => {
-    Roles.create({...req.body})
-      .then(roles => res.json(roles))
+    Fitur.create({...req.body})
+      .then(fitur => res.json(fitur))
       .catch(error => console.log(error))
   },
   removeById: (req, res) => {
-    Roles.findOneAndDelete({_id: req.params.id})
-      .then(roles => res.json(roles))
+    Fitur.findOneAndDelete({_id: req.params.id})
+      .then(fitur => res.json(fitur))
       .catch(error => console.log(error))
   }
 }

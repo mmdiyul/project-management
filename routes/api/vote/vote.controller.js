@@ -1,33 +1,33 @@
-let Roles = require('./roles.model')
+let Vote = require('./vote.model')
 
 module.exports = {
   findAll: (req, res) => {
-    Roles.find()
-      .then(roles => res.json(roles))
+    Vote.find()
+      .then(vote => res.json(vote))
       .catch(error => console.log(error))
   },
   findById: (req, res) => {
-    Roles.findById(req.params.id)
-      .then(roles => res.json(roles))
+    Vote.findById(req.params.id)
+      .then(vote => res.json(vote))
       .catch(error => console.log(error))
   },
   updateById: (req, res) => {
-    Roles.findOneAndUpdate(
+    Vote.findOneAndUpdate(
       {_id: req.params.id},
       {$set: req.body},
       {new: true}
     )
-      .then(roles => res.json(roles))
+      .then(user => res.json(user))
       .catch(error => console.log(error))
   },
   insert: (req, res) => {
-    Roles.create({...req.body})
-      .then(roles => res.json(roles))
+    Vote.create({...req.body})
+      .then(vote => res.json(vote))
       .catch(error => console.log(error))
   },
   removeById: (req, res) => {
-    Roles.findOneAndDelete({_id: req.params.id})
-      .then(roles => res.json(roles))
+    Vote.findOneAndDelete({_id: req.params.id})
+      .then(vote => res.json(vote))
       .catch(error => console.log(error))
   }
 }

@@ -1,33 +1,33 @@
-let Roles = require('./roles.model')
+let Project = require('./project.model')
 
 module.exports = {
   findAll: (req, res) => {
-    Roles.find()
-      .then(roles => res.json(roles))
+    Project.find()
+      .then(project => res.json(project))
       .catch(error => console.log(error))
   },
   findById: (req, res) => {
-    Roles.findById(req.params.id)
-      .then(roles => res.json(roles))
+    Project.findById(req.params.id)
+      .then(project => res.json(project))
       .catch(error => console.log(error))
   },
   updateById: (req, res) => {
-    Roles.findOneAndUpdate(
+    Project.findOneAndUpdate(
       {_id: req.params.id},
       {$set: req.body},
       {new: true}
     )
-      .then(roles => res.json(roles))
+      .then(project => res.json(project))
       .catch(error => console.log(error))
   },
   insert: (req, res) => {
-    Roles.create({...req.body})
-      .then(roles => res.json(roles))
+    Project.create({...req.body})
+      .then(project => res.json(project))
       .catch(error => console.log(error))
   },
   removeById: (req, res) => {
-    Roles.findOneAndDelete({_id: req.params.id})
-      .then(roles => res.json(roles))
+    Project.findOneAndDelete({_id: req.params.id})
+      .then(project => res.json(project))
       .catch(error => console.log(error))
   }
 }
