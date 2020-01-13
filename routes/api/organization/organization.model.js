@@ -32,12 +32,16 @@ const organizationSchema = Schema({
   createdBy: {
     type: Schema.Types.ObjectId, 
     ref: 'User', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   },
   updatedBy: {
     type: Schema.Types.ObjectId, 
     ref: 'User', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   }
 }, { timestamps: true })
 

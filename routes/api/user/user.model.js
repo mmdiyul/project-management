@@ -31,22 +31,30 @@ const userSchema = Schema({
   roleId: {
     type: Schema.Types.ObjectId, 
     ref: 'Roles', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   },
   organizationId: {
     type: Schema.Types.ObjectId, 
     ref: 'Organization', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   },
   createdBy: {
     type: Schema.Types.ObjectId, 
     ref: 'User', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   },
   updatedBy: {
     type: Schema.Types.ObjectId, 
     ref: 'User', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   }
 }, { timestamps: true })
 

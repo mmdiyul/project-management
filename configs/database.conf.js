@@ -32,5 +32,5 @@
 // }
 
 module.exports = {
-  URL: "mongodb://mmdiyul:tahun2014@localhost:27017/?authSource=admin&readPreference=primary&ssl=false/project-management"
+  URL: "mongodb://mmdiyul:tahun2014@localhost:27017/project-management?authSource=admin&readPreference=primary&ssl=false"
 }
