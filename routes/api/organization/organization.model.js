@@ -39,6 +39,6 @@ const organizationSchema = Schema({
     ref: 'User', 
     select: true
   }
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = model('Orgainzation', organizationSchema, 'organization')

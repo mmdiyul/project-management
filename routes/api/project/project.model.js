@@ -16,6 +16,6 @@ const projectSchema = Schema({
     required: true,
     select: true
   }
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = model('Project', projectSchema, 'project')

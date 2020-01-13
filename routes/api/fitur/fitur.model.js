@@ -42,6 +42,6 @@ const fiturSchema = Schema({
     ref: 'User', 
     select: true
   }
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = model('Fitur', fiturSchema, 'fitur')

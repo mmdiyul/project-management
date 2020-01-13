@@ -48,6 +48,6 @@ const userSchema = Schema({
     ref: 'User', 
     select: true
   }
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = model('User', userSchema, 'user')
