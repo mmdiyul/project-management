@@ -21,6 +21,6 @@ const voteSchema = Schema({
     ref: 'Fitur', 
     select: true
   }
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = model('Vote', voteSchema, 'vote')

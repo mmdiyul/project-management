@@ -35,13 +35,17 @@ const fiturSchema = Schema({
   createdBy: {
     type: Schema.Types.ObjectId, 
     ref: 'User', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   },
   updatedBy: {
     type: Schema.Types.ObjectId, 
     ref: 'User', 
-    select: true
+    select: true,
+    required: true,
+    default: null
   }
-}, { timestamp: true })
+}, { timestamps: true })
 
 module.exports = model('Fitur', fiturSchema, 'fitur')
