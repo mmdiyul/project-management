@@ -1,4 +1,5 @@
 let Roles = require('./roles.model')
+let User = require('../user/user.model')
 
 module.exports = {
   findAll: (req, res) => {
@@ -26,8 +27,11 @@ module.exports = {
       .catch(error => console.log(error))
   },
   removeById: (req, res) => {
-    Roles.findOneAndDelete({_id: req.params.id})
-      .then(roles => res.json(roles))
-      .catch(error => console.log(error))
+    Promise.all([
+      Roles.findOneAndDelete({_id: req.params.id})
+        .then(roles => res.json(roles))
+        .catch(error => console.log(error)),
+      User.deleteMany({roleId: req.params.id})
+    ])
   }
 }

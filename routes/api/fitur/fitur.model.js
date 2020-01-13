@@ -36,14 +36,12 @@ const fiturSchema = Schema({
     type: Schema.Types.ObjectId, 
     ref: 'User', 
     select: true,
-    required: true,
     default: null
   },
   updatedBy: {
     type: Schema.Types.ObjectId, 
     ref: 'User', 
     select: true,
-    required: true,
     default: null
   }
 }, { timestamps: true })

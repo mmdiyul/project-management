@@ -1,4 +1,5 @@
 let Organization = require('./organization.model')
+let User = require('../user/user.model')
 
 module.exports = {
   findAll: (req, res) => {
@@ -26,8 +27,11 @@ module.exports = {
       .catch(error => console.log(error))
   },
   removeById: (req, res) => {
-    Organization.findOneAndDelete({_id: req.params.id})
-      .then(organization => res.json(organization))
-      .catch(error => console.log(error))
+    Promise.all([
+      Organization.findOneAndDelete({_id: req.params.id})
+        .then(organization => res.json(organization))
+        .catch(error => console.log(error)),
+      User.updateMany({organizationId: null})
+    ])
   }
 }
