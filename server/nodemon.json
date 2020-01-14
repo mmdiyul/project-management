@@ -1,0 +1,6 @@
+{
+    "exec": "npm run dev",
+    "ignore":"client/*",
+    "watch": ["./routes/**","app.js","configs/**","bin/www"],
+    "ext": "js, html, css, json"
+}
