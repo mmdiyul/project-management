@@ -16,8 +16,8 @@ const options = {
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity,
     useUnifiedTopology: true ,
     dbName: isDevMode? 'project-management' : 'project-management',
-    user: isDevMode? 'mmdiyul' : 'mmdiyul',
-    pass: isDevMode? 'tahun2014' : 'tahun2014',
+    user: isDevMode? 'root' : 'root',
+    pass: isDevMode? 'root' : 'root',
     auth: {
         authdb: 'admin'
     }
