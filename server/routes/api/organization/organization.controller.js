@@ -1,5 +1,6 @@
 let Organization = require('./organization.model')
 let User = require('../user/user.model')
+const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
   findAll: (req, res, next) => {

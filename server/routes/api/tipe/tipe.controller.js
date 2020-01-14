@@ -1,4 +1,5 @@
 let Tipe = require('./tipe.model')
+const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
   findAll: (req, res, next) => {

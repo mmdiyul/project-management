@@ -1,4 +1,5 @@
 let Vote = require('./vote.model')
+const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
   findAll: (req, res, next) => {

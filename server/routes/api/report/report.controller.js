@@ -1,4 +1,5 @@
 let Report = require('./report.model')
+const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
   findAll: (req, res, next) => {

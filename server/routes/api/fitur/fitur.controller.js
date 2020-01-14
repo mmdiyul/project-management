@@ -1,4 +1,5 @@
 let Fitur = require('./fitur.model')
+const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
   findAll: (req, res, next) => {
