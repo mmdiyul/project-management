@@ -20,6 +20,7 @@ module.exports = {
       .then(fitur => res.json(fitur))
       .catch(error => console.log(error))
   },
+  
   insert: (req, res) => {
     Fitur.create({...req.body})
       .then(fitur => res.json(fitur))
