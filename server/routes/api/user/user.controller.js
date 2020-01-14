@@ -1,9 +1,13 @@
 let User = require('./user.model')
-const { query, parseWhere } = require('../../helpers')
+const { query, parseWhere, createError } = require('../../helpers')
+const { hash, compare } = require('bcrypt')
 
 module.exports = {
   findAll: (req, res, next) => {
     const { where, limit, offset, sort } = query(req.query)
+    if(req.user && req.user.role.name=="admin"){
+      where['role'] = req.user.role._id
+    }
     const count = User.countDocuments(where)
     const search = req.query.search
     if(search){
@@ -15,7 +19,11 @@ module.exports = {
         email: {'$regex': search, '$options': 'i'}
       }]
     }
-    const data = User.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
+    const data = User.find(where).limit(limit).skip(offset).sort(sort)
+      .populate('roles', 'nama deskripsi prioritas')
+      .populate('createdBy', 'nama')
+      .populate('updatedBy', 'nama')
+    
     Promise.all([count, data])
       .then(cb=>{
         res.json({
@@ -40,7 +48,8 @@ module.exports = {
       .catch(error => next(error))
   },
   insert: (req, res, next) => {
-    User.create({...req.body})
+    const newUser = createNewUser(req.body)
+    newUser
       .then(user => res.json(user))
       .catch(error => next(error))
   },
@@ -49,4 +58,24 @@ module.exports = {
       .then(user => res.json(user))
       .catch(error => next(error))
   }
+}
+
+const createNewUser = (data) => {
+  return new Promise((resolve, reject)=>{
+    const findUsername = User.findOne({username: data.username})
+    const findEmail = User.findOne({email: data.email})
+    const hashPassword = hash(data.password,10)
+    let actions = [findUsername, findEmail, hashPassword]
+
+    Promise.all(actions)
+      .then(cb=>{
+        if(cb[0]) throw createError(400,'Username already registered!')
+        if(cb[1]) throw createError(400,'Email already registered!')
+        const hashedPassword = cb[2]
+        data.password = hashedPassword;
+        return User.create(data)
+      })
+      .then(results => resolve(results))
+      .catch(err => reject(err))
+  })
 }
