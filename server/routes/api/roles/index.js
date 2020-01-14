@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const rolesController = require('./roles.controller')
+const { schema } = require('./roles.validation')
+const { protect, checkQuery, checkSchema, checkId, validationResult } = require('../../helpers')
 
-router.get('/', rolesController.findAll)
-router.get('/:id', rolesController.findById)
-router.post('/', rolesController.insert)
-router.put('/:id', rolesController.updateById)
-router.delete('/:id', rolesController.removeById)
+router.get('/', checkQuery, rolesController.findAll)
+router.get('/:id', checkId, rolesController.findById)
+router.post('/', checkSchema(schema), validationResult, rolesController.insert)
+router.put('/:id', checkId, rolesController.updateById)
+router.delete('/:id', checkId, rolesController.removeById)
 
 module.exports = router
