@@ -17,38 +17,40 @@ module.exports = {
       }]
     }
     const data = Roles.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
-    Promise.all([count, data]).then(cb=>{
+    Promise.all([count, data])
+      .then(cb=>{
         res.json({
             count: cb[0],
             results: cb[1]
         })
-    }, err=>next(err))
+      })
+      .catch(err => next(err))
   },
-  findById: (req, res, next) => {
-    Roles.findById(req.params.id, (err, results) => {
-      if(err) return next(err);
-      res.json(results)
-    })
+  findById: (req, res) => {
+    Roles.findById(req.params.id)
+      .then(roles => res.json(roles))
+      .catch(error => console.log(error))
   },
-  updateById: (req, res, next) => {
-    Roles.findOneAndUpdate(req.params.id, req.body, {new: true, upsert:false, multi: false}).exec((err, results) => {
-      if(err) return next(err)
-      res.json(results)
-    })
+  updateById: (req, res) => {
+    Roles.findOneAndUpdate(
+      {_id: req.params.id},
+      {$set: req.body},
+      {new: true}
+    )
+      .then(roles => res.json(roles))
+      .catch(error => console.log(error))
   },
-  insert: (req, res, next) => {
-    Roles.create(req.body, (err, results) => {
-      if(err) return next(err)
-      res.json(results)
-    })
+  insert: (req, res) => {
+    Roles.create({...req.body})
+      .then(roles => res.json(roles))
+      .catch(error => console.log(error))
   },
   removeById: (req, res) => {
     Promise.all([
-      Roles.findByIdAndRemove(req.params.id).exec((err, results)=>{
-        if(err) return next(err)
-        res.json(results)
-      }),
+      Roles.findOneAndDelete({_id: req.params.id}),
       User.deleteMany({roleId: req.params.id})
     ])
+      .then(roles => res.json(roles))
+      .catch(error => console.log(error))
   }
 }
