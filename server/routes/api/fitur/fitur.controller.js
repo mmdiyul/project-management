@@ -14,9 +14,19 @@ module.exports = {
     const data = Fitur.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
     Promise.all([count, data])
       .then(cb=>{
+        let page = parseInt(req.query.page)
+        let perPage = parseInt(req.query.perPage)
+        if (!perPage) { perPage = 5 }
+        const pageCount = Math.ceil(cb[1].length / perPage)
+        if (!page) { page = 1 }
+        if (page > pageCount) {
+          page = pageCount
+        }
         res.json({
             count: cb[0],
-            results: cb[1]
+            page: page,
+            pageCount: pageCount,
+            results: cb[1].slice(page * perPage - perPage, page * perPage)
         })
       })
       .catch(error => next(error))
