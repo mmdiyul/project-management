@@ -1,5 +1,4 @@
 const { Schema, model} = require('mongoose')
-const mongoosePaginate = require('mongoose-paginate')
 
 const userSchema = Schema({
   nama: {
