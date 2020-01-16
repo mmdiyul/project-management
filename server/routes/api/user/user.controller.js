@@ -36,11 +36,11 @@ module.exports = {
         let urlQuery = url[1].split('?')
         let prevUrl, nextUrl
         if ((urlQuery == "" || urlPage[0] == "") && (urlQuery == "" || urlQuery[1] == null)) {
-          prevUrl = url[0] + "user/" + (page - 1)
-          nextUrl = url[0] + "user/" + (page + 1)
+          prevUrl = url[0] + "user/page/" + (page - 1)
+          nextUrl = url[0] + "user/page/" + (page + 1)
         } else {
-          prevUrl = url[0] + "user/" + (page - 1) + "?" + urlQuery[1]
-          nextUrl = url[0] + "user/" + (page + 1) + "?" + urlQuery[1]
+          prevUrl = url[0] + "user/page/" + (page - 1) + "?" + urlQuery[1]
+          nextUrl = url[0] + "user/page/" + (page + 1) + "?" + urlQuery[1]
         }
         if (!page || page == 1) {
           prevUrl = null
