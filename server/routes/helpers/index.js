@@ -25,12 +25,12 @@ exports.parseWhere = (where, i )=>{
 }
 exports.query = (query) =>{
     let where = {};
-    let limit = 0;
+    let limit = 5;
     let offset = 0;
     let sort = { '_id': -1 };
     if(query.where) where = this.parseWhere(query.where, query.i);
     if(query.limit) limit = query.limit;
-    if(query.offset) offset = query.offset;
+    if(query.offset) offset = query.offset || offset;
     const tempSort = {}
     if(query.sort && query.direction) {
       tempSort[query.sort] = (query.direction==='asc') ? 1 : -1;
