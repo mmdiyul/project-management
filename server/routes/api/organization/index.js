@@ -5,6 +5,7 @@ const { schema } = require('./organization.validation')
 const { protect, checkQuery, checkSchema, checkId, validationResult } = require('../../helpers')
 
 router.get('/', checkQuery, organizationController.findAll)
+router.get('/page/:page', checkQuery, organizationController.findAll)
 router.get('/:id', checkId, organizationController.findById)
 router.post('/', checkSchema(schema), validationResult, organizationController.insert)
 router.put('/:id', checkId, organizationController.updateById)

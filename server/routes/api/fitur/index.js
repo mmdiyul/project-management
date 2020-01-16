@@ -5,6 +5,7 @@ const { schema } = require('./fitur.validation')
 const { protect, checkQuery, checkSchema, checkId, validationResult } = require('../../helpers')
 
 router.get('/', checkQuery, fiturController.findAll)
+router.get('/page/:page', checkQuery, fiturController.findAll)
 router.get('/:id', checkId, fiturController.findById)
 router.post('/', checkSchema(schema), validationResult, fiturController.insert)
 router.put('/:id', checkId, fiturController.updateById)

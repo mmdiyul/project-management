@@ -3,7 +3,11 @@ const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
   findAll: (req, res, next) => {
-    const { where, limit, offset, sort } = query(req.query)
+    let page = parseInt(req.params.page) || 1
+    let { where, limit, offset, sort } = query(req.query)
+    if (page) {
+      offset = (limit * page) - limit
+    }
     const count = Project.countDocuments(where)
     const search = req.query.search
     if(search){
@@ -14,19 +18,33 @@ module.exports = {
     const data = Project.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
     Promise.all([count, data])
       .then(cb=>{
-        let page = parseInt(req.query.page)
-        let perPage = parseInt(req.query.perPage)
-        if (!perPage) { perPage = 5 }
-        const pageCount = Math.ceil(cb[1].length / perPage)
-        if (!page) { page = 1 }
-        if (page > pageCount) {
+        let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+        let url = fullUrl.split('project')
+        let urlPage = url[1].split('/')
+        let urlQuery = url[1].split('?')
+        let prevUrl, nextUrl
+        if ((urlQuery == "" || urlPage[0] == "") && (urlQuery == "" || urlQuery[1] == null)) {
+          prevUrl = url[0] + "project/page/" + (page - 1)
+          nextUrl = url[0] + "project/page/" + (page + 1)
+        } else {
+          prevUrl = url[0] + "project/page/" + (page - 1) + "?" + urlQuery[1]
+          nextUrl = url[0] + "project/page/" + (page + 1) + "?" + urlQuery[1]
+        }
+        if (!page || page == 1) {
+          prevUrl = null
+        }
+        const pageCount = Math.ceil(cb[0] / limit)
+        if (page >= pageCount) {
           page = pageCount
+          nextUrl = null
         }
         res.json({
             count: cb[0],
             page: page,
             pageCount: pageCount,
-            results: cb[1].slice(page * perPage - perPage, page * perPage)
+            prevUrl: prevUrl,
+            nextUrl: nextUrl,
+            results: cb[1]
         })
       })
       .catch(error => next(error))
