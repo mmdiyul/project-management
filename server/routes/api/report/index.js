@@ -6,6 +6,7 @@ const { protect, checkQuery, checkSchema, checkId, validationResult } = require(
 
 router.get('/', checkQuery, reportController.findAll)
 router.get('/:id', checkId, reportController.findById)
+router.get('/page/:page', checkQuery, reportController.findAll)
 router.post('/', checkSchema(schema), validationResult, reportController.insert)
 router.put('/:id', checkId, reportController.updateById)
 router.delete('/:id', checkId, reportController.removeById)

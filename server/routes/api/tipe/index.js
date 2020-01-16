@@ -6,6 +6,7 @@ const { protect, checkQuery, checkSchema, checkId, validationResult } = require(
 
 router.get('/', checkQuery, tipeController.findAll)
 router.get('/:id', checkId, tipeController.findById)
+router.get('/page/:page', checkQuery, tipeController.findAll)
 router.post('/', checkSchema(schema), validationResult, tipeController.insert)
 router.put('/:id', checkId, tipeController.updateById)
 router.delete('/:id', checkId, tipeController.removeById)
