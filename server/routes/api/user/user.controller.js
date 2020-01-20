@@ -81,6 +81,25 @@ module.exports = {
       .then(user => res.json(user))
       .catch(error => next(error))
   },
+  loginLocalStrategy: (username, passwd) => {
+    return new Promise((resolve, reject)=>{
+      const user = Users.findOne({ $or:[{email:username},{username}] })
+      .populate('role')
+      .select('id password username email nama roleId')
+      user.then((foundUser)=>{
+        if(!foundUser) return reject(createError(400,'Username atau Email tidak ditemukan!'))
+        const { password } = foundUser
+        console.log(passwd, password)
+        const passwdValidation = compare(passwd, password)
+        passwdValidation.then(isTrue=>{
+            if(!isTrue) return reject(createError(400,'Password salah!'))
+            return resolve(foundUser)
+        }).catch(err=>{
+            return reject(err)
+        })
+      })
+    })
+  },
   removeById: (req, res, next) => {
     User.findOneAndDelete({_id: req.params.id})
       .then(user => res.json(user))
