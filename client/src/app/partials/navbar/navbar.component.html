@@ -1,34 +1,36 @@
 <!-- Navbar -->
-<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
   <div class="container px-3">
-    <a class="navbar-brand" [routerLink]="'.'">
-      Project Management
-    </a>
+    <strong>
+      <a class="navbar-brand" [routerLink]="'.'">
+        Project Management
+      </a>
+    </strong>
     <button class="navbar-toggler rounded-0" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/home']" (click)="isMenuCollapsed = true">Beranda<span class="sr-only">(current)</span></a>
+          <a class="nav-link" [routerLink]="['/home']" (click)="isMenuCollapsed = true"><strong>Beranda</strong><span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/fitur']" (click)="isMenuCollapsed = true">Fitur</a>
+          <a class="nav-link" [routerLink]="['/fitur']" (click)="isMenuCollapsed = true"><strong>Fitur</strong></a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/project']" (click)="isMenuCollapsed = true">Project</a>
+          <a class="nav-link" [routerLink]="['/project']" (click)="isMenuCollapsed = true"><strong>Project</strong></a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/about']" (click)="isMenuCollapsed = true">Tentang</a>
+          <a class="nav-link" [routerLink]="['/about']" (click)="isMenuCollapsed = true"><strong>Tentang</strong></a>
         </li>
         <li class="nav-item">
-          <span class="nav-link"> | </span>
+          <span class="nav-link" style="color:#c8d6e5;"> | </span>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/daftar']" (click)="isMenuCollapsed = true">Daftar</a>
+          <a class="nav-link" [routerLink]="['/daftar']" (click)="isMenuCollapsed = true"><strong>Daftar</strong></a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/login']" (click)="isMenuCollapsed = true">Login</a>
+          <a class="nav-link" [routerLink]="['/login']" (click)="isMenuCollapsed = true"><strong>Login</strong></a>
         </li>
       </ul>
     </div>

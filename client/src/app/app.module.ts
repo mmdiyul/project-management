@@ -5,15 +5,20 @@ import { NavbarModule } from './partials/navbar/navbar.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HowtoComponent } from './partials/howto/howto.component';
+import { PreviewFiturComponent } from './partials/preview-fitur/preview-fitur.component';
+import { FiturComponent } from './pages/fitur/fitur.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    FiturComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarModule,
     LoginModule,
     HomeModule,
+    MatCardModule,
     FooterModule
   ],
   providers: [],
