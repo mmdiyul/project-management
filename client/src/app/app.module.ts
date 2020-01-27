@@ -1,3 +1,4 @@
+import { FiturModule } from './pages/fitur/fitur.module';
 import { FooterModule } from './partials/footer/footer.module';
 import { HomeModule } from './pages/home/home.module';
 import { LoginModule } from './pages/login/login.module';
@@ -17,8 +18,7 @@ import { FiturComponent } from './pages/fitur/fitur.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FiturComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +28,7 @@ import { FiturComponent } from './pages/fitur/fitur.component';
     NavbarModule,
     LoginModule,
     HomeModule,
+    FiturModule,
     MatCardModule,
     FooterModule
   ],

@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'fitur',
+    loadChildren: () => import('./pages/fitur/fitur.module').then(m => m.FiturModule)
   }
 ];
 
