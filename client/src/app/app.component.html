@@ -1,2 +1,7 @@
-<app-navbar></app-navbar>
-<router-outlet *ngIf="true"></router-outlet>
+<ng-container *ngIf="layout === 'frontend'">
+  <app-navbar></app-navbar>
+  <router-outlet *ngIf="true"></router-outlet>
+</ng-container>
+<app-sidenav *ngIf="layout === 'backend'">
+  <router-outlet *ngIf="true"></router-outlet>
+</app-sidenav>

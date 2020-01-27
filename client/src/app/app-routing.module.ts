@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'fitur',
     loadChildren: () => import('./pages/fitur/fitur.module').then(m => m.FiturModule)
+  },
+  {
+    path: 'backend',
+    loadChildren: () => import('./backend/backend.module').then(m => m.BackendModule)
   }
 ];
 

@@ -1,3 +1,5 @@
+import { SidenavModule } from './backend/partials/sidenav/sidenav.module';
+import { BackendModule } from './backend/backend.module';
 import { FiturModule } from './pages/fitur/fitur.module';
 import { FooterModule } from './partials/footer/footer.module';
 import { HomeModule } from './pages/home/home.module';
@@ -31,7 +33,8 @@ import { ListFiturComponent } from './partials/list-fitur/list-fitur.component';
     HomeModule,
     FiturModule,
     MatCardModule,
-    FooterModule
+    FooterModule,
+    BackendModule
   ],
   providers: [],
   bootstrap: [AppComponent]
