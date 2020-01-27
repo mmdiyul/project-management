@@ -1,3 +1,5 @@
+import { SidenavModule } from './backend/partials/sidenav/sidenav.module';
+import { BackendModule } from './backend/backend.module';
 import { FiturModule } from './pages/fitur/fitur.module';
 import { FooterModule } from './partials/footer/footer.module';
 import { HomeModule } from './pages/home/home.module';
@@ -11,9 +13,6 @@ import {MatCardModule} from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HowtoComponent } from './partials/howto/howto.component';
-import { PreviewFiturComponent } from './partials/preview-fitur/preview-fitur.component';
-import { FiturComponent } from './pages/fitur/fitur.component';
 
 
 @NgModule({
@@ -30,7 +29,8 @@ import { FiturComponent } from './pages/fitur/fitur.component';
     HomeModule,
     FiturModule,
     MatCardModule,
-    FooterModule
+    FooterModule,
+    BackendModule
   ],
   providers: [],
   bootstrap: [AppComponent]
