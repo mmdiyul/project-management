@@ -14,11 +14,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HowtoComponent } from './partials/howto/howto.component';
 import { PreviewFiturComponent } from './partials/preview-fitur/preview-fitur.component';
 import { FiturComponent } from './pages/fitur/fitur.component';
+import { ListFiturComponent } from './partials/list-fitur/list-fitur.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

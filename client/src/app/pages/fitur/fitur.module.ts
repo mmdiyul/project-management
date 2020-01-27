@@ -2,6 +2,7 @@ import { FiturComponent } from './fitur.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { ListFiturModule } from './../../partials/list-fitur/list-fitur.module';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
   declarations: [FiturComponent],
   imports: [
     CommonModule,
+    ListFiturModule,
     RouterModule.forChild(routes)
   ],
   exports: [
