@@ -20,6 +20,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/fitur/fitur.module').then(m => m.FiturModule)
   },
   {
+    path: 'project',
+    loadChildren: () => import('./pages/project/project.module').then(m => m.ProjectModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule)
+  },
+  {
     path: 'backend',
     loadChildren: () => import('./backend/backend.module').then(m => m.BackendModule)
   }
