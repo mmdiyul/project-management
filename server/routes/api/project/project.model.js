@@ -15,6 +15,18 @@ const projectSchema = Schema({
     type: Number,
     required: true,
     select: true
+  },
+  createdBy: {
+    type: Schema.Types.ObjectId, 
+    ref: 'User', 
+    select: true,
+    default: null
+  },
+  updatedBy: {
+    type: Schema.Types.ObjectId, 
+    ref: 'User', 
+    select: true,
+    default: null
   }
 }, { timestamps: true })
 

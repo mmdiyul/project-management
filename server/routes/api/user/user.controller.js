@@ -24,7 +24,7 @@ module.exports = {
       }]
     }
     const data = User.find(where).limit(limit).skip(offset).sort(sort)
-      .populate('roles', 'nama deskripsi prioritas')
+      .populate('roleId', 'nama deskripsi prioritas')
       .populate('createdBy', 'nama')
       .populate('updatedBy', 'nama')
     

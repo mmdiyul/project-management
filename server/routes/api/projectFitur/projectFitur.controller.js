@@ -10,6 +10,9 @@ module.exports = {
     }
     const count = ProjectFitur.countDocuments(where)
     const data = ProjectFitur.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
+      .populate('projectId', 'nama budget totalHarga')
+      .populate('fiturId', 'nama waktuPengerjaan kesulitan estimasiHarga')
+
     Promise.all([count, data])
       .then(cb=>{
         let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
