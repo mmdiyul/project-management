@@ -16,6 +16,10 @@ module.exports = {
       }]
     }
     const data = Fitur.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
+      .populate('parent', 'nama')
+      .populate('createdBy', 'nama')
+      .populate('updatedBy', 'nama')
+
     Promise.all([count, data])
       .then(cb=>{
         let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl

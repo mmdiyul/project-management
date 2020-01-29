@@ -1,7 +1,11 @@
 <ng-container *ngIf="layout === 'frontend'">
   <app-navbar></app-navbar>
   <router-outlet *ngIf="true"></router-outlet>
+  <div class="mx-5 px-5">
+    <app-footer></app-footer>
+  </div>
 </ng-container>
 <app-sidenav *ngIf="layout === 'backend'">
   <router-outlet *ngIf="true"></router-outlet>
+  <app-footer></app-footer>
 </app-sidenav>

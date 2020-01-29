@@ -10,6 +10,9 @@ module.exports = {
     }
     const count = Vote.countDocuments(where)
     const data = Vote.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
+    .populate('userId', 'nama')
+    .populate('fiturId', 'nama waktuPengerjaan kesulitan estimasiHarga')
+
     Promise.all([count, data])
       .then(cb=>{
         let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl

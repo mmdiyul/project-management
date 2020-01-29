@@ -16,6 +16,9 @@ module.exports = {
       }]
     }
     const data = Project.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
+      .populate('createdBy', 'nama')
+      .populate('updatedBy', 'nama')
+
     Promise.all([count, data])
       .then(cb=>{
         let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
