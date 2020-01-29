@@ -1,9 +1,26 @@
 
-.example-card {
-  max-width: 400px;
+.top {
+  padding: 40px;
+  background-color: #2d3436;
+  color: #dfe6e9;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.fitur {
+  padding: 15px;
 }
