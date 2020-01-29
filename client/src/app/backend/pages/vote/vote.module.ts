@@ -1,3 +1,4 @@
+import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule } from '@angular/material';
 import { VoteBackendComponent } from './vote.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,11 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     VoteBackendComponent

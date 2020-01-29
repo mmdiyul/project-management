@@ -1,3 +1,4 @@
+import { MatTableModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { RoleBackendComponent } from './role.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,11 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     RoleBackendComponent

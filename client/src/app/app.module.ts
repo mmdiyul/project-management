@@ -1,4 +1,3 @@
-import { SidenavModule } from './backend/partials/sidenav/sidenav.module';
 import { BackendModule } from './backend/backend.module';
 import { FiturModule } from './pages/fitur/fitur.module';
 import { FooterModule } from './partials/footer/footer.module';
@@ -13,6 +12,7 @@ import {MatCardModule} from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,7 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FiturModule,
     MatCardModule,
     FooterModule,
-    BackendModule
+    BackendModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,3 +3,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+table.backend-table {
+  min-width: 100%;
+  th, td.cols {
+    padding: 8px 12px 8px 12px;
+    // overflow: hidden;
+    // max-width: 120px;
+    text-overflow: ellipsis;
+    // white-space: nowrap;
+  }
+  th.actions, td.actions {
+    width: 8px;
+    padding: 8px 12px 8px 12px;
+    margin:0;
+    text-align: right;
+  }
+}

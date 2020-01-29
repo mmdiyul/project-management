@@ -1,3 +1,4 @@
+import { MatTableModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { UserBackendComponent } from './user.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,11 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     UserBackendComponent

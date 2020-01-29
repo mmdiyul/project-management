@@ -1,9 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav border-0 shadow" fixedInViewport
+  <mat-sidenav #drawer class="sidenav border-0 shadow custom-scrollbar" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar color="primary" class="shadow">Menu</mat-toolbar>
     <div class="d-flex flex-column align-items-center justify-content-center p-3 text-break text-center">
       <div class="rounded-circle bg-primary" style="width: 100px; height: 100px;"></div>
       <strong class="mt-2">John Doe</strong>

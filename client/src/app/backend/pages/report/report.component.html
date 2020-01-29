@@ -1,1 +1,44 @@
-<p>report works!</p>
+<div class="m-4">
+  <div class="bg-white w-100 p-4 shadow">
+    <h4>Laporan</h4>
+    <hr>
+    <button mat-raised-button color="primary">Tambah Laporan</button>
+    <table mat-table [dataSource]="dataSource" class="w-100 backend-table">
+      <ng-container matColumnDef="index">
+        <th mat-header-cell *matHeaderCellDef> No </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+      </ng-container>
+      <ng-container matColumnDef="fitur">
+        <th mat-header-cell *matHeaderCellDef> Nama Fitur </th>
+        <td mat-cell class="cols" *matCellDef="let element"> {{element.fitur}} </td>
+      </ng-container>
+      <ng-container matColumnDef="pesan">
+        <th mat-header-cell *matHeaderCellDef> Pesan Laporan </th>
+        <td mat-cell class="cols" *matCellDef="let element">{{ element.pesan }}</td>
+      </ng-container>
+      <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef> User Pelapor </th>
+        <td mat-cell class="cols" *matCellDef="let element"> {{element.user}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" class="actions">
+          <button mat-icon-button [matMenuTriggerFor]="actionMenu">
+            <mat-icon>more_vert</mat-icon></button>
+          <mat-menu #actionMenu="matMenu" xPosition="before">
+            <button mat-menu-item>
+              <mat-icon>edit</mat-icon>
+              <span>Sunting</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>delete</mat-icon>
+              <span>Hapus</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

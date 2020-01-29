@@ -1,3 +1,4 @@
+import { MatTableModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { FiturBackendComponent } from './fitur.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,7 +17,11 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
   ],
   exports: [
     FiturBackendComponent
