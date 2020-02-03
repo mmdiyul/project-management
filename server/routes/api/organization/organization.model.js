@@ -43,4 +43,4 @@ const organizationSchema = Schema({
   }
 }, { timestamps: true })
 
-module.exports = model('Orgainzation', organizationSchema, 'organization')
+module.exports = model('Organization', organizationSchema, 'organization')
