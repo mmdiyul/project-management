@@ -19,8 +19,7 @@ import { ProjectModule } from './pages/project/project.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-
+    AppComponent
   ],
   imports: [
     BrowserModule,
