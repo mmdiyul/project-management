@@ -6,6 +6,11 @@ const fiturSchema = Schema({
     required: true,
     select: true
   },
+  deskripsi: {
+    type: String,
+    required: true,
+    select: true
+  },
   waktuPengerjaan: {
     type: Number,
     required: true,

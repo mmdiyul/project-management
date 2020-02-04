@@ -4,19 +4,21 @@ exports.schema = {
         trim: true,
         isEmpty: false,
     },
-    waktuPekerjaan:{
+    deskripsi: {
         isString: true,
+        isEmpty: false
+    },
+    waktuPekerjaan:{
         trim: true,
         isEmpty: false
     },
     kesulitan:{
-        isString: true,
         isEmpty: false,
         trim: true
     },
     estimasiHarga:{
         isEmpty:false,
-        isString: true,
+        trim: true
     },
     tipeId:{
         isEmpty:false,
