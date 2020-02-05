@@ -1,0 +1,23 @@
+<div class="row w-100 m-0">
+  <div class="col-8"></div>
+  <div class="col-4 shadow login-page">
+      <div class="login-form">
+        <span style="font-size: x-large;">Login Akun</span>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mt-2">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username" autocomplete="off">
+            <mat-icon matSuffix>perm_identity</mat-icon>
+            <mat-error *ngIf="username.invalid">Username harus diisi</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" formControlName="password">
+            <mat-icon matSuffix>fingerprint</mat-icon>
+            <mat-error *ngIf="password.invalid">Password harus diisi</mat-error>
+          </mat-form-field>
+          <button mat-raised-button type="submit" color="accent" class="w-100" [disabled]="loginForm.invalid">Masuk</button>
+        </form>
+      </div>
+  </div>
+</div>

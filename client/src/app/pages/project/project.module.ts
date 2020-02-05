@@ -1,3 +1,4 @@
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardActions, MatCard, MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material';
 import { ProjectComponent } from './project.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
     ListProjectModule,
     MatSliderModule,
     MatCardModule,
+    MatProgressBarModule,
     RouterModule.forChild(routes)
   ],
   exports: [

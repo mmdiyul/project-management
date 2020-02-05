@@ -18,7 +18,7 @@
           <ul class="list-unstyled mb-0">
             <li>
               <mat-card-actions class="m-0">
-                <a [routerLink]="['/project/project-action']"><button mat-flat-button class="btn-block btn-primary">Add Project</button></a>
+                <a [routerLink]="['/project/project-action']"><button mat-flat-button class="btn btn-block btn-primary">Add Project</button></a>
               </mat-card-actions>
             </li>
             <li class="mt-2">
@@ -36,22 +36,157 @@
     </div>
     <!-- /.col-lg-3 -->
 
-    <div class="col-lg-9">
+    <div class="col-lg-9 mt-4">
       <div class="row">
         <div class="col-lg mb-4">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
-              <h4 class="card-title">
-                <a href="#">Project Six</a>
-              </h4>
-              <h5>$24.99</h5>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+              <div class="row">
+                <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <th scope="row" style="width: 20%;"><p class="card-text">Nama Project</p></th>
+                      <td><p class="card-text">:</p></td>
+                      <td><p class="card-text">Project One</p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p class="card-text">Deskripsi</p></th>
+                      <td><p class="card-text">:</p></td>
+                      <td><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet neque sapien, id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p class="card-text">Tipe</p></th>
+                      <td><p class="card-text">:</p></td>
+                      <td><p class="card-text">Company Profile</p></td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><p class="card-text">Total Harga</p></th>
+                      <td><p class="card-text">:</p></td>
+                      <td><p class="card-text">Rp. 250.000,00</p></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+          <div class="card-footer">
+            <h5 class="text-center">Fitur</h5>
+          </div>
+          <div class="card-body">
+            <!-- Blog Post -->
+            <div class="card mb-3 col-md mt-2 bg-light fitur">
+              <div class="row no-gutters">
+                <div class="col-md-3">
+                  <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h5 class="">Fitur Login Register</h5>
+                    <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="col-md-2 mt-auto">
+                  <label for="progress">Difficult</label>
+                  <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
+                    <h6 class="">Rp. 250.000,00</h6>
+                    <mat-card-actions class="m-0">
+                      <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn btn-block btn-success">VOTE</button></a>
+                    </mat-card-actions>
+                </div>
+              </div>
             </div>
-            <div class="card-footer">
-              <mat-card-actions class="m-0">
-                <a [routerLink]="['/project/detail']"><button mat-flat-button class="btn-block btn-success">VIEW</button></a>
-              </mat-card-actions>
+            <!-- Blog Post -->
+            <div class="card mb-3 col-md mt-2 bg-light fitur">
+              <div class="row no-gutters">
+                <div class="col-md-3">
+                  <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h5 class="">Fitur Login Register</h5>
+                    <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="col-md-2 mt-auto">
+                  <label for="progress">Difficult</label>
+                  <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
+                    <h6 class="">Rp. 250.000,00</h6>
+                    <mat-card-actions class="m-0">
+                      <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn btn-block btn-success">VOTE</button></a>
+                    </mat-card-actions>
+                </div>
+              </div>
+            </div>
+            <!-- Blog Post -->
+            <div class="card mb-3 col-md mt-2 bg-light fitur">
+              <div class="row no-gutters">
+                <div class="col-md-3">
+                  <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h5 class="">Fitur Login Register</h5>
+                    <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="col-md-2 mt-auto">
+                  <label for="progress">Difficult</label>
+                  <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
+                    <h6 class="">Rp. 250.000,00</h6>
+                    <mat-card-actions class="m-0">
+                      <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn btn-block btn-success">VOTE</button></a>
+                    </mat-card-actions>
+                </div>
+              </div>
+            </div>
+            <!-- Blog Post -->
+            <div class="card mb-3 col-md mt-2 bg-light fitur">
+              <div class="row no-gutters">
+                <div class="col-md-3">
+                  <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h5 class="">Fitur Login Register</h5>
+                    <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="col-md-2 mt-auto">
+                  <label for="progress">Difficult</label>
+                  <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
+                    <h6 class="">Rp. 250.000,00</h6>
+                    <mat-card-actions class="m-0">
+                      <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn btn-block btn-success">VOTE</button></a>
+                    </mat-card-actions>
+                </div>
+              </div>
+            </div>
+            <!-- Blog Post -->
+            <div class="card mb-3 col-md mt-2 bg-light fitur">
+              <div class="row no-gutters">
+                <div class="col-md-3">
+                  <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+                </div>
+                <div class="col-md-7">
+                  <div class="card-body">
+                    <h5 class="">Fitur Login Register</h5>
+                    <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  </div>
+                </div>
+                <div class="col-md-2 mt-auto">
+                  <label for="progress">Difficult</label>
+                  <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
+                    <h6 class="">Rp. 250.000,00</h6>
+                    <mat-card-actions class="m-0">
+                      <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn btn-block btn-success">VOTE</button></a>
+                    </mat-card-actions>
+                </div>
+              </div>
             </div>
           </div>
         </div>

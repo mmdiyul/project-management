@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AboutModule } from './pages/about/about.module';
 import { ProjectModule } from './pages/project/project.module';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
