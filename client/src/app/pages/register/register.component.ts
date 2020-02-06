@@ -13,12 +13,20 @@ export class RegisterComponent implements OnInit {
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required]
     });
   }
 
   get username() {
     return this.loginForm.get('username');
+  }
+  get name() {
+    return this.loginForm.get('name');
+  }
+  get email() {
+    return this.loginForm.get('email');
   }
   get password() {
     return this.loginForm.get('password');
