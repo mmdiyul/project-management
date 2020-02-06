@@ -1,8 +1,10 @@
-import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { OrganizationBackendComponent } from './organization.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OrganizationActionComponent } from './organization-action/organization-action.component';
 
 const routes: Routes = [
   {
@@ -13,7 +15,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    OrganizationBackendComponent
+    OrganizationBackendComponent,
+    OrganizationActionComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +24,18 @@ const routes: Routes = [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     OrganizationBackendComponent
+  ],
+  entryComponents: [
+    OrganizationActionComponent
   ]
 })
 export class OrganizationBackendModule { }

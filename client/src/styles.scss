@@ -8,15 +8,31 @@ table.backend-table {
   min-width: 100%;
   th, td.cols {
     padding: 8px 12px 8px 12px;
-    // overflow: hidden;
-    // max-width: 120px;
     text-overflow: ellipsis;
-    // white-space: nowrap;
   }
   th.actions, td.actions {
     width: 8px;
     padding: 8px 12px 8px 12px;
     margin:0;
     text-align: right;
+  }
+}
+
+
+.backend-content{
+	position: relative;
+	min-height: calc(100vh - 450px);
+  width:100%;
+  .backend-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

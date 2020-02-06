@@ -1,0 +1,59 @@
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <h1 mat-dialog-title class="mt-2">{{ this.dialogTitle }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Nama</mat-label>
+      <input matInput formControlName="nama" placeholder="Nama">
+      <mat-error *ngIf="form.get('nama').hasError('required')">
+        Nama wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" placeholder="Username">
+      <mat-error *ngIf="form.get('username').hasError('required')">
+        Username wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email">
+      <mat-error *ngIf="form.get('email').hasError('required')">
+        Email wajib diisi
+      </mat-error>
+      <mat-error *ngIf="form.get('email').hasError('email')">
+        Email tidak valid
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" placeholder="Password" type="password">
+      <mat-error *ngIf="form.get('password').hasError('required')">
+        Password wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="roleId">
+        <mat-option *ngFor="let role of rolesList" [value]="role._id">
+          {{ role.nama }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('roleId').hasError('required')">
+          Role wajib diisi
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Organisasi</mat-label>
+      <mat-select formControlName="organizationId">
+        <mat-option *ngFor="let organization of organizationList" [value]="organization._id">
+          {{ organization.nama }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-raised-button class="mx-auto mt-1" type="button" (click)="closeDialog()">Batal</button>
+    <button mat-raised-button class="mx-auto mt-1" color="primary" type="submit" [disabled]="form.invalid">Simpan</button>
+  </div>
+</form>

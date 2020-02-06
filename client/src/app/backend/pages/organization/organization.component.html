@@ -2,7 +2,7 @@
   <div class="bg-white w-100 p-4 shadow">
     <h4>Organisasi</h4>
     <hr>
-    <button mat-raised-button color="primary">Tambah Organisasi</button>
+    <button mat-raised-button color="primary" (click)="add()">Tambah Organisasi</button>
     <table mat-table [dataSource]="dataSource" class="w-100 backend-table">
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef> No </th>
@@ -38,11 +38,11 @@
           <button mat-icon-button [matMenuTriggerFor]="actionMenu">
             <mat-icon>more_vert</mat-icon></button>
           <mat-menu #actionMenu="matMenu" xPosition="before">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="edit(element)">
               <mat-icon>edit</mat-icon>
               <span>Sunting</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="remove(element)">
               <mat-icon>delete</mat-icon>
               <span>Hapus</span>
             </button>

@@ -1,0 +1,44 @@
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <h1 mat-dialog-title class="mt-2">{{ this.dialogTitle }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Nama</mat-label>
+      <input matInput formControlName="nama" placeholder="Nama">
+      <mat-error *ngIf="form.get('nama').hasError('required')">
+        Nama wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Deskripsi</mat-label>
+      <textarea matInput formControlName="deskripsi" placeholder="Deskripsi" rows="2"></textarea>
+      <mat-error *ngIf="form.get('deskripsi').hasError('required')">
+          Deskripsi wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Waktu Pengerjaan</mat-label>
+      <input matInput formControlName="waktuPengerjaan" placeholder="Waktu Pengerjaan" type="number">
+      <mat-error *ngIf="form.get('waktuPengerjaan').hasError('required')">
+        Waktu pengerjaan wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Tingkat Kesulitan</mat-label>
+      <input matInput formControlName="kesulitan" placeholder="Tingkat Kesulitan" type="number">
+      <mat-error *ngIf="form.get('kesulitan').hasError('required')">
+        Tingkat kesulitan wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Estimasi Harga</mat-label>
+      <input matInput formControlName="estimasiHarga" placeholder="Estimasi Harga" type="number">
+      <mat-error *ngIf="form.get('estimasiHarga').hasError('required')">
+        Estimasi harga wajib diisi
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-raised-button class="mx-auto mt-1" type="button" (click)="closeDialog()">Batal</button>
+    <button mat-raised-button class="mx-auto mt-1" color="primary" type="submit" [disabled]="form.invalid">Simpan</button>
+  </div>
+</form>

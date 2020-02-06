@@ -1,12 +1,11 @@
-export interface Roles {
+export interface Tipe {
   _id?: string;
   nama?: string;
-  prioritas?: number;
   deskripsi?: string;
 }
 
-export interface RolesAPI {
-  results: Roles[];
+export interface TipeAPI {
+  results: Tipe[];
   count: number;
   prevUrl: string;
   nextUrl: string;

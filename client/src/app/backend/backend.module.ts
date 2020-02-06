@@ -1,3 +1,4 @@
+import { RemoveDialogModule } from './partials/remove-dialog/remove-dialog.module';
 import { Routes, RouterModule } from '@angular/router';
 import { SidenavModule } from './partials/sidenav/sidenav.module';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ import { ReportBackendModule } from './pages/report/report.module';
 import { RoleBackendModule } from './pages/role/role.module';
 import { UserBackendModule } from './pages/user/user.module';
 import { VoteBackendModule } from './pages/vote/vote.module';
+import { RemoveDialogComponent } from './partials/remove-dialog/remove-dialog.component';
 
 const routes: Routes = [
   {
@@ -68,10 +70,15 @@ const routes: Routes = [
     RoleBackendModule,
     UserBackendModule,
     VoteBackendModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    RemoveDialogModule
   ],
   exports: [
-    SidenavModule
+    SidenavModule,
+    RemoveDialogModule
+  ],
+  entryComponents: [
+    RemoveDialogComponent
   ]
 })
 export class BackendModule { }

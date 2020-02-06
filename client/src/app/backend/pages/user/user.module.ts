@@ -1,8 +1,10 @@
-import { MatTableModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { MatTableModule, MatButtonModule, MatIconModule, MatMenuModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import { UserBackendComponent } from './user.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { UserActionsComponent } from './user-actions/user-actions.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -13,7 +15,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UserBackendComponent
+    UserBackendComponent,
+    UserActionsComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +24,20 @@ const routes: Routes = [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   exports: [
     UserBackendComponent
+  ],
+  entryComponents: [
+    UserActionsComponent
   ]
 })
 export class UserBackendModule { }

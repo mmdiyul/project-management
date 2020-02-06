@@ -1,8 +1,10 @@
-import { MatTableModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FiturBackendComponent } from './fitur.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FiturActionComponent } from './fitur-action/fitur-action.component';
 
 const routes: Routes = [
   {
@@ -13,7 +15,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    FiturBackendComponent
+    FiturBackendComponent,
+    FiturActionComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +24,18 @@ const routes: Routes = [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     FiturBackendComponent
+  ],
+  entryComponents: [
+    FiturActionComponent
   ]
 })
 export class FiturBackendModule { }

@@ -1,19 +1,18 @@
 import { HelpersService } from './helpers.service';
-import { User, UsersAPI } from './user';
-import { Injectable } from '@angular/core';
+import { Tipe, TipeAPI } from './tipe';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class TipeService {
 
   constructor(
     private http: HttpClient,
     private helper: HelpersService
   ) { }
-
-  endpoint = '/api/user';
+  endpoint = '/api/tipe';
   getAll(search= '', sort= null, order= null, offset= 0, limit= 10) {
     const url = this.endpoint;
     let params = this.helper.getLimitParams(limit, offset);
@@ -21,18 +20,18 @@ export class UserService {
     if (search) {
       params = params.set('search', search);
     }
-    return this.http.get<UsersAPI>(url);
+    return this.http.get<TipeAPI>(url);
   }
-  insert(data: User) {
+  insert(data: Tipe) {
     const url = this.endpoint;
-    return this.http.post<User>(url, data);
+    return this.http.post<Tipe>(url, data);
   }
-  updateById(id: string, data: User) {
+  updateById(id: string, data: Tipe) {
     const url = `${this.endpoint}/${id}`;
-    return this.http.put<User>(url, data);
+    return this.http.put<Tipe>(url, data);
   }
   removeById(id: string) {
     const url = `${this.endpoint}/${id}`;
-    return this.http.delete<User>(url);
+    return this.http.delete<Tipe>(url);
   }
 }

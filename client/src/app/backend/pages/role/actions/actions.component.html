@@ -1,0 +1,30 @@
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <h1 mat-dialog-title class="mt-2">{{ this.dialogTitle }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Nama</mat-label>
+      <input matInput formControlName="nama" placeholder="Nama">
+      <mat-error *ngIf="form.get('nama').hasError('required')">
+        Nama wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Deskripsi</mat-label>
+      <textarea matInput formControlName="deskripsi" placeholder="Deskripsi" rows="2"></textarea>
+      <mat-error *ngIf="form.get('deskripsi').hasError('required')">
+          Deskripsi wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Prioritas</mat-label>
+      <input type="number" max="2" min="0" matInput formControlName="prioritas">
+      <mat-error *ngIf="form.get('prioritas').hasError('required')">
+        Prioritas wajib diisi
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-raised-button class="mx-auto mt-1" type="button" (click)="closeDialog()">Batal</button>
+    <button mat-raised-button class="mx-auto mt-1" color="primary" type="submit" [disabled]="form.invalid">Simpan</button>
+  </div>
+</form>

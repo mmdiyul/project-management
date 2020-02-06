@@ -1,8 +1,10 @@
-import { MatTableModule, MatButtonModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule, MatButtonModule, MatIconModule, MatMenuModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule } from '@angular/material';
 import { RoleBackendComponent } from './role.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActionsComponent } from './actions/actions.component';
 
 const routes: Routes = [
   {
@@ -13,7 +15,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    RoleBackendComponent
+    RoleBackendComponent,
+    ActionsComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +24,17 @@ const routes: Routes = [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     RoleBackendComponent
-  ]
+  ],
+  entryComponents: [ ActionsComponent ]
 })
 export class RoleBackendModule { }

@@ -2,7 +2,7 @@
   <div class="bg-white w-100 p-4 shadow">
     <h4>Pengguna</h4>
     <hr>
-    <button mat-raised-button color="primary">Tambah Pengguna</button>
+    <button mat-raised-button color="primary" (click)="add()">Tambah Pengguna</button>
     <table mat-table [dataSource]="dataSource" class="w-100 backend-table">
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef> No </th>
@@ -27,8 +27,12 @@
       <ng-container matColumnDef="organisasi">
         <th mat-header-cell *matHeaderCellDef> Organisasi </th>
         <td mat-cell class="cols" *matCellDef="let element">
-          <span *ngIf="element.organisasiId == null">Tidak memiliki Organisasi</span>
-          <span *ngIf="element.organisasiId != null">{{element.organisasiId}}</span>
+          <span *ngIf="element.organizationId != null">
+            {{ element.organizationId.nama }}
+          </span>
+          <span *ngIf="element.organizationId == null">
+            -
+          </span>
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
@@ -37,11 +41,11 @@
           <button mat-icon-button [matMenuTriggerFor]="actionMenu">
             <mat-icon>more_vert</mat-icon></button>
           <mat-menu #actionMenu="matMenu" xPosition="before">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="edit(element)">
               <mat-icon>edit</mat-icon>
               <span>Sunting</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="remove(element)">
               <mat-icon>delete</mat-icon>
               <span>Hapus</span>
             </button>

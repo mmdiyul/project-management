@@ -1,19 +1,18 @@
 import { HelpersService } from './helpers.service';
-import { User, UsersAPI } from './user';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Organization, OrganizationAPI } from './organization';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class OrganizationService {
 
   constructor(
     private http: HttpClient,
     private helper: HelpersService
   ) { }
-
-  endpoint = '/api/user';
+  endpoint = '/api/organization';
   getAll(search= '', sort= null, order= null, offset= 0, limit= 10) {
     const url = this.endpoint;
     let params = this.helper.getLimitParams(limit, offset);
@@ -21,18 +20,18 @@ export class UserService {
     if (search) {
       params = params.set('search', search);
     }
-    return this.http.get<UsersAPI>(url);
+    return this.http.get<OrganizationAPI>(url);
   }
-  insert(data: User) {
+  insert(data: Organization) {
     const url = this.endpoint;
-    return this.http.post<User>(url, data);
+    return this.http.post<Organization>(url, data);
   }
-  updateById(id: string, data: User) {
+  updateById(id: string, data: Organization) {
     const url = `${this.endpoint}/${id}`;
-    return this.http.put<User>(url, data);
+    return this.http.put<Organization>(url, data);
   }
   removeById(id: string) {
     const url = `${this.endpoint}/${id}`;
-    return this.http.delete<User>(url);
+    return this.http.delete<Organization>(url);
   }
 }

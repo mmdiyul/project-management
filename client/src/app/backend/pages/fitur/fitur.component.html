@@ -2,7 +2,7 @@
   <div class="bg-white w-100 p-4 shadow">
     <h4>Fitur</h4>
     <hr>
-    <button mat-raised-button color="primary">Tambah Fitur</button>
+    <button mat-raised-button color="primary" (click)="add()">Tambah Fitur</button>
     <table mat-table [dataSource]="dataSource" class="w-100 backend-table">
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef> No </th>
@@ -16,17 +16,17 @@
         <th mat-header-cell *matHeaderCellDef> Deskripsi </th>
         <td mat-cell class="cols" *matCellDef="let element">{{ element.deskripsi }}</td>
       </ng-container>
-      <ng-container matColumnDef="waktu_pengerjaan">
+      <ng-container matColumnDef="waktuPengerjaan">
         <th mat-header-cell *matHeaderCellDef> Waktu Pengerjaan </th>
-        <td mat-cell class="cols" *matCellDef="let element"> {{element.waktu_pengerjaan}} </td>
+        <td mat-cell class="cols" *matCellDef="let element"> {{element.waktuPengerjaan}} </td>
       </ng-container>
       <ng-container matColumnDef="kesulitan">
         <th mat-header-cell *matHeaderCellDef> Tingkat Kesulitan </th>
         <td mat-cell class="cols" *matCellDef="let element"> {{element.kesulitan | number}} </td>
       </ng-container>
-      <ng-container matColumnDef="estimasi_harga">
+      <ng-container matColumnDef="estimasiHarga">
         <th mat-header-cell *matHeaderCellDef> Estimasi Harga </th>
-        <td mat-cell class="cols" *matCellDef="let element"> Rp.&nbsp;{{element.estimasi_harga | number}},- </td>
+        <td mat-cell class="cols" *matCellDef="let element"> Rp.&nbsp;{{element.estimasiHarga | number}},- </td>
       </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
@@ -34,11 +34,11 @@
           <button mat-icon-button [matMenuTriggerFor]="actionMenu">
             <mat-icon>more_vert</mat-icon></button>
           <mat-menu #actionMenu="matMenu" xPosition="before">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="edit(element)">
               <mat-icon>edit</mat-icon>
               <span>Sunting</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="remove(element)">
               <mat-icon>delete</mat-icon>
               <span>Hapus</span>
             </button>

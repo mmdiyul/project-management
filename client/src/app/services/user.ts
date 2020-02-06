@@ -1,3 +1,4 @@
+import { Organization } from './organization';
 import { Roles } from './roles';
 
 export interface User {
@@ -7,7 +8,7 @@ export interface User {
   password?: string;
   email?: string;
   roleId?: Roles;
-  organizationId?: null;
+  organizationId?: Organization;
   createdBy?: User;
   updateBy?: User;
   createdAt?: Date;
@@ -17,4 +18,6 @@ export interface User {
 export  interface UsersAPI {
   results: User[];
   count: number;
+  prevUrl: string;
+  nextUrl: string;
 }

@@ -1,0 +1,47 @@
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <h1 mat-dialog-title class="mt-2">{{ this.dialogTitle }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Nama</mat-label>
+      <input matInput formControlName="nama" placeholder="Nama">
+      <mat-error *ngIf="form.get('nama').hasError('required')">
+        Nama wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Alamat</mat-label>
+      <textarea matInput formControlName="alamat" placeholder="Alamat" rows="2"></textarea>
+      <mat-error *ngIf="form.get('alamat').hasError('required')">
+          Alamat wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Telepon</mat-label>
+      <input matInput formControlName="telepon" placeholder="Telepon">
+      <mat-error *ngIf="form.get('telepon').hasError('required')">
+        Telepon wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email">
+      <mat-error *ngIf="form.get('email').hasError('required')">
+        Email wajib diisi
+      </mat-error>
+      <mat-error *ngIf="form.get('email').hasError('email')">
+        Email tidak valid
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Website</mat-label>
+      <input matInput formControlName="website" placeholder="Website">
+      <mat-error *ngIf="form.get('website').hasError('required')">
+        Website wajib diisi
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-raised-button class="mx-auto mt-1" type="button" (click)="closeDialog()">Batal</button>
+    <button mat-raised-button class="mx-auto mt-1" color="primary" type="submit" [disabled]="form.invalid">Simpan</button>
+  </div>
+</form>

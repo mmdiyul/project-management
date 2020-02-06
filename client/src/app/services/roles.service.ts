@@ -1,3 +1,4 @@
+import { HelpersService } from './helpers.service';
 import { Injectable } from '@angular/core';
 import { RolesAPI, Roles } from './roles';
 import { HttpClient } from '@angular/common/http';
@@ -8,17 +9,18 @@ import { HttpClient } from '@angular/common/http';
 export class RolesService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private helper: HelpersService
   ) { }
-  endpoint = 'http://localhost:3000/api/roles';
-  getAll() {
+  endpoint = '/api/roles';
+  getAll(search= '', sort= null, order= null, offset= 0, limit= 10) {
     const url = this.endpoint;
-    // let params = this.helper.getLimitParams(limit, offset);
-    // params = params.set('sort', sort).set('direction', order);
-    // if (search) {
-    //   params = params.set('search', search);
-    // }
-    return this.http.get<RolesAPI>(url);
+    let params = this.helper.getLimitParams(limit, offset);
+    params = params.set('sort', sort).set('direction', order);
+    if (search) {
+      params = params.set('search', search);
+    }
+    return this.http.get<RolesAPI>(url, {params});
   }
   insert(data: Roles) {
     const url = this.endpoint;
