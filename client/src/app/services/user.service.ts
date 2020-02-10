@@ -14,14 +14,16 @@ export class UserService {
   ) { }
 
   endpoint = '/api/user';
-  getAll(search= '', sort= null, order= null, offset= 0, limit= 10) {
+  getAll(search= '', sort= null, order= null, offset= 0, limit= 5, page = 1) {
+    this.endpoint = '/api/user';
+    this.endpoint = this.endpoint + '/page/' + page;
     const url = this.endpoint;
     let params = this.helper.getLimitParams(limit, offset);
     params = params.set('sort', sort).set('direction', order);
     if (search) {
       params = params.set('search', search);
     }
-    return this.http.get<UsersAPI>(url);
+    return this.http.get<UsersAPI>(url, { params });
   }
   insert(data: User) {
     const url = this.endpoint;
