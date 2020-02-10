@@ -1,10 +1,12 @@
+import { HelpersService } from './../../../services/helpers.service';
+import { FormGroup, FormControl } from '@angular/forms';
 import { RemoveDialogComponent } from './../../partials/remove-dialog/remove-dialog.component';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { OrganizationActionComponent } from './organization-action/organization-action.component';
 import { Subject } from 'rxjs';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { OrganizationService } from './../../../services/organization.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 // export interface PeriodicElement {
 //   nama: string;
@@ -51,15 +53,38 @@ export class OrganizationBackendComponent implements OnInit {
 
   constructor(
     private services: OrganizationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private helper: HelpersService
   ) { }
 
   private modalWidth = '800px';
   private unsubs = new Subject();
   private subject = 'name';
+  countDataSearch = 0;
+  isLoadingResults = true;
+  sortActive = 'nama';
+  sortDirection = 'asc';
+  limit = 5; offset = 0;
+  page = 1;
+  pageSizeOpts = [5, 10, 25, 100];
+  searchForm = new FormGroup({
+    search: new FormControl(''),
+  });
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   ngOnInit() {
     this.getData();
+    this.searchForm.get('search').valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(val => {
+      this.isLoadingResults = true;
+      this.services.getAll(val, this.sortActive, this.sortDirection, this.offset).subscribe(({count, results}) => {
+        this.dataSource = results;
+        this.resultsLength = count;
+        this.countDataSearch = results.length;
+        this.isLoadingResults = false;
+      });
+    });
   }
 
   ngOnDestroy(): void {
@@ -67,12 +92,26 @@ export class OrganizationBackendComponent implements OnInit {
     this.unsubs.complete();
   }
 
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      this.offset = this.paginator.pageIndex * this.paginator.pageSize;
+      this.limit = this.paginator.pageSize;
+      this.page = this.paginator.pageIndex + 1;
+      this.getData();
+    });
+    this.paginator._intl.itemsPerPageLabel = 'Jumlah Baris';
+  }
+
   getData() {
-    this.services.getAll()
+    this.isLoadingResults = true;
+    this.services.getAll( this.searchForm.get('search').value, this.sortActive, this.sortDirection, this.offset, this.limit, this.page )
       .subscribe(({count, results}) => {
         this.dataSource = results;
         this.resultsLength = count;
+        this.isLoadingResults = false;
+        this.countDataSearch = results.length;
       }, (err) => {
+        this.isLoadingResults = false;
         console.log(err);
       });
   }
@@ -88,11 +127,11 @@ export class OrganizationBackendComponent implements OnInit {
         .pipe(takeUntil(this.unsubs))
         .subscribe(() => {
           this.getData();
-          // this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
+          this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
           // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
-          // this.helper.sbError(err);
-          console.log(err);
+          this.helper.sbError(err);
+          // console.log(err);
         });
       }
     });
@@ -109,11 +148,11 @@ export class OrganizationBackendComponent implements OnInit {
         .pipe(takeUntil(this.unsubs))
         .subscribe(() => {
           this.getData();
-          // this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
+          this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
           // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
-          // this.helper.sbError(err);
-          console.log(err);
+          this.helper.sbError(err);
+          // console.log(err);
         });
       }
     });
@@ -124,11 +163,11 @@ export class OrganizationBackendComponent implements OnInit {
       if (result) {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
-          // this.helper.sbSuccess(`${data[this.subject]} dihapus`);
+          this.helper.sbSuccess(`${data[this.subject]} dihapus`);
           // console.log(`${data[this.subject]} dihapus`);
         }, err => {
-        //  this.helper.sbError(err);
-          console.log(err);
+         this.helper.sbError(err);
+          // console.log(err);
         });
       }
     });

@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatPaginatorModule } from '@angular/material';
 import { OrganizationBackendComponent } from './organization.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -29,7 +29,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   exports: [
     OrganizationBackendComponent

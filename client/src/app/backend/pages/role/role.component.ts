@@ -4,8 +4,8 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ActionsComponent } from './actions/actions.component';
 import { RolesService } from './../../../services/roles.service';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 
 // export interface PeriodicElement {
@@ -57,9 +57,14 @@ export class RoleBackendComponent implements OnInit {
   sortActive = 'prioritas';
   sortDirection = 'asc';
   limit = 5; offset = 0;
+  page = 1;
+  pageSizeOpts = [5, 10, 25, 100];
   searchForm = new FormGroup({
     search: new FormControl(''),
   });
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   ngOnInit() {
     this.getData();
@@ -77,6 +82,16 @@ export class RoleBackendComponent implements OnInit {
   ngOnDestroy() {
     this.unsubs.next();
     this.unsubs.complete();
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe(() => {
+      this.offset = this.paginator.pageIndex * this.paginator.pageSize;
+      this.limit = this.paginator.pageSize;
+      this.page = this.paginator.pageIndex + 1;
+      this.getData();
+    });
+    this.paginator._intl.itemsPerPageLabel = 'Jumlah Baris';
   }
 
   getData() {

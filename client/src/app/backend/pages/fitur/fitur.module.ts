@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatTableModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSpinner, MatPaginatorModule, MatProgressSpinnerModule } from '@angular/material';
 import { FiturBackendComponent } from './fitur.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -29,7 +29,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   exports: [
     FiturBackendComponent

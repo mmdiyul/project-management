@@ -13,7 +13,9 @@ export class TipeService {
     private helper: HelpersService
   ) { }
   endpoint = '/api/tipe';
-  getAll(search= '', sort= null, order= null, offset= 0, limit= 10) {
+  getAll(search= '', sort= null, order= null, offset= 0, limit= 5, page = 1) {
+    this.endpoint = '/api/tipe';
+    this.endpoint = this.endpoint + '/page/' + page;
     const url = this.endpoint;
     let params = this.helper.getLimitParams(limit, offset);
     params = params.set('sort', sort).set('direction', order);
