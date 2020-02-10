@@ -12,7 +12,6 @@ module.exports = {
     if(req.user && req.user.role.name=="admin"){
       where['role'] = req.user.role._id
     }
-    const count = User.countDocuments(where)
     const search = req.query.search
     if(search){
       where['$or'] = [{
@@ -23,6 +22,7 @@ module.exports = {
         email: {'$regex': search, '$options': 'i'}
       }]
     }
+    const count = User.countDocuments(where)
     const data = User.find(where).limit(limit).skip(offset).sort(sort)
       .populate('roleId', 'nama deskripsi prioritas')
       .populate('organizationId', 'nama')

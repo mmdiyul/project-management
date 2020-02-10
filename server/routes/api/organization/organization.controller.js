@@ -9,7 +9,6 @@ module.exports = {
     if (page) {
       offset = (limit * page) - limit
     }
-    const count = Organization.countDocuments(where)
     const search = req.query.search
     if(search){
       where['$or'] = [{
@@ -24,6 +23,7 @@ module.exports = {
         website: {'$regex': search, '$options': 'i'}
       }]
     }
+    const count = Organization.countDocuments(where)
     const data = Organization.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
       .populate('createdBy', 'nama')
       .populate('updatedBy', 'nama')

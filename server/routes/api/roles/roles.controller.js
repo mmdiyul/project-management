@@ -9,7 +9,6 @@ module.exports = {
     if (page) {
       offset = (limit * page) - limit
     }
-    const count = Roles.countDocuments(where)
     const search = req.query.search
     if(search){
       where['$or'] = [{
@@ -18,6 +17,7 @@ module.exports = {
         deskripsi: {'$regex': search, '$options': 'i'}
       }]
     }
+    const count = Roles.countDocuments(where)
     const data = Roles.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
     Promise.all([count, data])
       .then(cb=>{

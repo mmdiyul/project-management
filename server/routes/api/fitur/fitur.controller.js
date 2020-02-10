@@ -8,13 +8,13 @@ module.exports = {
     if (page) {
       offset = (limit * page) - limit
     }
-    const count = Fitur.countDocuments(where)
     const search = req.query.search
     if(search){
       where['$or'] = [{
         nama: {'$regex': search, '$options': 'i'}
       }]
     }
+    const count = Fitur.countDocuments(where)
     const data = Fitur.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
       .populate('parent', 'nama')
       .populate('createdBy', 'nama')

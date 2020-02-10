@@ -8,13 +8,13 @@ module.exports = {
     if (page) {
       offset = (limit * page) - limit
     }
-    const count = Project.countDocuments(where)
     const search = req.query.search
     if(search){
       where['$or'] = [{
         nama: {'$regex': search, '$options': 'i'}
       }]
     }
+    const count = Project.countDocuments(where)
     const data = Project.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
       .populate('createdBy', 'nama')
       .populate('updatedBy', 'nama')

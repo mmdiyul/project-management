@@ -8,13 +8,13 @@ module.exports = {
     if (page) {
       offset = (limit * page) - limit
     }
-    const count = Report.countDocuments(where)
     const search = req.query.search
     if(search){
       where['$or'] = [{
         pesan: {'$regex': search, '$options': 'i'}
       }]
     }
+    const count = Report.countDocuments(where)
     const data = Report.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
       .populate('userId', 'nama')
       .populate('fiturId', 'nama waktuPengerjaan kesulitan estimasiHarga')
