@@ -10,93 +10,22 @@
         </h2>
 
         <!-- Blog Post -->
-        <div class="card mb-3 col-md mt-2 bg-light fitur">
+        <div class="card mb-3 col-md mt-2 bg-light fitur" *ngFor="let item of dataSource">
           <div class="row no-gutters">
             <div class="col-md-3">
               <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
             </div>
             <div class="col-md-7">
               <div class="card-body">
-                <h5 class="">Fitur Login Register</h5>
-                <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h5 class="" *ngIf="item.nama"> {{item.nama}} </h5>
+                <mat-card-subtitle class="mb-1" *ngIf="item.createdBy">{{item.createdBy}}</mat-card-subtitle>
+                <p class="card-text" *ngIf="item.deskripsi">{{item.deskripsi}}</p>
               </div>
             </div>
             <div class="col-md-2 mt-auto">
               <label for="progress">Difficult</label>
-              <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
-                <h6 class="">Rp. 250.000,00</h6>
-                <mat-card-actions class="m-0">
-                  <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
-                </mat-card-actions>
-            </div>
-          </div>
-        </div>
-
-        <!-- Blog Post -->
-        <div class="card mb-3 col-md mt-2 bg-light fitur">
-          <div class="row no-gutters">
-            <div class="col-md-3">
-              <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="">Fitur Login Register</h5>
-                <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-            <div class="col-md-2 mt-auto">
-              <label for="progress">Difficult</label>
-              <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
-                <h6 class="">Rp. 250.000,00</h6>
-                <mat-card-actions class="m-0">
-                  <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
-                </mat-card-actions>
-            </div>
-          </div>
-        </div>
-
-        <!-- Blog Post -->
-        <div class="card mb-3 col-md mt-2 bg-light fitur">
-          <div class="row no-gutters">
-            <div class="col-md-3">
-              <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="">Fitur Login Register</h5>
-                <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet neque sapien, id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-            <div class="col-md-2 mt-auto">
-              <label for="progress">Difficult</label>
-              <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
-                <h6 class="">Rp. 250.000,00</h6>
-                <mat-card-actions class="m-0">
-                  <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
-                </mat-card-actions>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-3 col-md mt-2 bg-light fitur">
-          <div class="row no-gutters">
-            <div class="col-md-3">
-              <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="">Fitur Login Register</h5>
-                <mat-card-subtitle class="mb-1">admin</mat-card-subtitle>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet neque sapien, id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-            <div class="col-md-2 mt-auto">
-              <label for="progress">Difficult</label>
-              <mat-progress-bar class="mb-3" mode="determinate" value="40"></mat-progress-bar>
-                <h6 class="">Rp. 250.000,00</h6>
+              <mat-progress-bar class="mb-3" mode="determinate" *ngIf="item.kesulitan" value="{{item.kesulitan}}"></mat-progress-bar>
+                <h6 class="" *ngIf="item.estimasiHarga">Rp.  {{item.estimasiHarga}} </h6>
                 <mat-card-actions class="m-0">
                   <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
                 </mat-card-actions>
