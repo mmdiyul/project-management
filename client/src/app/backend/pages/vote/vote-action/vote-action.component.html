@@ -1,0 +1,45 @@
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <h1 mat-dialog-title class="mt-2">{{ this.dialogTitle }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Kesulitan</mat-label>
+      <input matInput formControlName="kesulitan" placeholder="Kesulitan" type="number">
+      <mat-error *ngIf="form.get('kesulitan').hasError('required')">
+          Kesulitan wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Harga</mat-label>
+      <input matInput formControlName="harga" placeholder="Harga" type="number">
+      <mat-error *ngIf="form.get('harga').hasError('required')">
+          Harga wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Fitur</mat-label>
+      <mat-select formControlName="fiturId">
+        <mat-option *ngFor="let fitur of fiturList" [value]="fitur._id">
+          {{ fitur.nama }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('fiturId').hasError('required')">
+        Fitur wajib diisi
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>User</mat-label>
+      <mat-select formControlName="userId">
+        <mat-option *ngFor="let user of userList" [value]="user._id">
+          {{ user.nama }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('userId').hasError('required')">
+        User wajib diisi
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-raised-button class="mx-auto mt-1" type="button" (click)="closeDialog()">Batal</button>
+    <button mat-raised-button class="mx-auto mt-1" color="primary" type="submit" [disabled]="form.invalid">Simpan</button>
+  </div>
+</form>

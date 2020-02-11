@@ -13,6 +13,7 @@ export class FiturService {
     private helper: HelpersService
   ) { }
   endpoint = '/api/fitur';
+  firstEndpoint = '/api/fitur';
   getAll(search= '', sort= null, order= null, offset= 0, limit= 5, page = 1) {
     this.endpoint = '/api/fitur';
     this.endpoint = this.endpoint + '/page/' + page;
@@ -22,18 +23,18 @@ export class FiturService {
     if (search) {
       params = params.set('search', search);
     }
-    return this.http.get<FiturAPI>(url);
+    return this.http.get<FiturAPI>(url, { params });
   }
   insert(data: Fitur) {
-    const url = this.endpoint;
+    const url = this.firstEndpoint;
     return this.http.post<Fitur>(url, data);
   }
   updateById(id: string, data: Fitur) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.put<Fitur>(url, data);
   }
   removeById(id: string) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.delete<Fitur>(url);
   }
 }

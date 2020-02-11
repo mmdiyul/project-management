@@ -1,44 +1,72 @@
 <div class="m-4">
   <div class="bg-white w-100 p-4 shadow">
     <h4>Laporan</h4>
-    <hr>
-    <button mat-raised-button color="primary">Tambah Laporan</button>
-    <table mat-table [dataSource]="dataSource" class="w-100 backend-table">
-      <ng-container matColumnDef="index">
-        <th mat-header-cell *matHeaderCellDef> No </th>
-        <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
-      </ng-container>
-      <ng-container matColumnDef="fitur">
-        <th mat-header-cell *matHeaderCellDef> Nama Fitur </th>
-        <td mat-cell class="cols" *matCellDef="let element"> {{element.fitur}} </td>
-      </ng-container>
-      <ng-container matColumnDef="pesan">
-        <th mat-header-cell *matHeaderCellDef> Pesan Laporan </th>
-        <td mat-cell class="cols" *matCellDef="let element">{{ element.pesan }}</td>
-      </ng-container>
-      <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef> User Pelapor </th>
-        <td mat-cell class="cols" *matCellDef="let element"> {{element.user}} </td>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element" class="actions">
-          <button mat-icon-button [matMenuTriggerFor]="actionMenu">
-            <mat-icon>more_vert</mat-icon></button>
-          <mat-menu #actionMenu="matMenu" xPosition="before">
-            <button mat-menu-item>
-              <mat-icon>edit</mat-icon>
-              <span>Sunting</span>
-            </button>
-            <button mat-menu-item>
-              <mat-icon>delete</mat-icon>
-              <span>Hapus</span>
-            </button>
-          </mat-menu>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    <hr><div class="row">
+      <div class="col-9">
+        <form [formGroup]="searchForm" class="w-100">
+          <mat-form-field class="w-100">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput formControlName="search" placeholder="Cari..." autocomplete="off">
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="col-3 py-2">
+        <button mat-raised-button class="w-100" color="primary" (click)="add()">Tambah Laporan</button>
+      </div>
+    </div>
+    <div class="backend-content">
+      <div class="backend-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div class="backend-loading-shade" *ngIf="countDataSearch === 0">
+        <mat-icon class="text-danger">error_outline</mat-icon>
+        <span class="text-danger">&nbsp;Data tidak ditemukan</span>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="w-100 backend-table">
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef> No </th>
+          <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+        </ng-container>
+        <ng-container matColumnDef="fitur">
+          <th mat-header-cell *matHeaderCellDef> Nama Fitur </th>
+          <td mat-cell class="cols" *matCellDef="let element"> {{element.fiturId.nama}} </td>
+        </ng-container>
+        <ng-container matColumnDef="pesan">
+          <th mat-header-cell *matHeaderCellDef> Pesan Laporan </th>
+          <td mat-cell class="cols" *matCellDef="let element">{{ element.pesan }}</td>
+        </ng-container>
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef> User Pelapor </th>
+          <td mat-cell class="cols" *matCellDef="let element">
+            <span *ngIf="element.userId != null">
+              {{ element.userId.nama }}
+            </span>
+            <span *ngIf="element.userId == null">
+              -
+            </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" class="actions">
+            <button mat-icon-button [matMenuTriggerFor]="actionMenu">
+              <mat-icon>more_vert</mat-icon></button>
+            <mat-menu #actionMenu="matMenu" xPosition="before">
+              <button mat-menu-item (click)="edit(element)">
+                <mat-icon>edit</mat-icon>
+                <span>Sunting</span>
+              </button>
+              <button mat-menu-item (click)="remove(element)">
+                <mat-icon>delete</mat-icon>
+                <span>Hapus</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator [length]="resultsLength" [pageSize]="limit" [pageSizeOptions]="pageSizeOpts"></mat-paginator>
   </div>
 </div>

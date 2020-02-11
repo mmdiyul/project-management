@@ -59,7 +59,7 @@ export class OrganizationBackendComponent implements OnInit {
 
   private modalWidth = '800px';
   private unsubs = new Subject();
-  private subject = 'name';
+  private subject = 'nama';
   countDataSearch = 0;
   isLoadingResults = true;
   sortActive = 'nama';
