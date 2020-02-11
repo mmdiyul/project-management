@@ -47,7 +47,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class FiturBackendComponent implements OnInit {
 
-  displayedColumns: string[] = ['index', 'nama', 'deskripsi', 'waktuPengerjaan', 'kesulitan', 'estimasiHarga', 'actions'];
+  displayedColumns: string[] = ['index', 'nama', 'deskripsi', 'waktuPengerjaan', 'kesulitan', 'estimasiHarga', 'tipeId', 'actions'];
   dataSource = [];
   resultsLength = 0;
 
@@ -59,7 +59,7 @@ export class FiturBackendComponent implements OnInit {
 
   private modalWidth = '800px';
   private unsubs = new Subject();
-  private subject = 'name';
+  private subject = 'nama';
   countDataSearch = 0;
   isLoadingResults = true;
   sortActive = 'nama';

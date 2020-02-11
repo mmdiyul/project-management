@@ -1,8 +1,10 @@
-import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatPaginatorModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import { ReportBackendComponent } from './report.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReportActionComponent } from './report-action/report-action.component';
 
 const routes: Routes = [
   {
@@ -13,7 +15,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ReportBackendComponent
+    ReportBackendComponent,
+    ReportActionComponent
   ],
   imports: [
     CommonModule,
@@ -21,10 +24,21 @@ const routes: Routes = [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   exports: [
     ReportBackendComponent
+  ],
+  entryComponents: [
+    ReportActionComponent
   ]
 })
 export class ReportBackendModule { }

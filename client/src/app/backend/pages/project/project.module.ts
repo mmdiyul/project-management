@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProjectBackendComponent } from './project.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProjectActionComponent } from './project-action/project-action.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ProjectBackendComponent
+    ProjectBackendComponent,
+    ProjectActionComponent
   ],
   imports: [
     CommonModule,

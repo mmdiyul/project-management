@@ -1,8 +1,13 @@
 <div class="m-4">
   <div class="bg-white w-100 p-4 shadow">
     <h4>Project</h4>
-    <hr>
-    <button mat-raised-button color="primary">Tambah Project</button>
+    <hr><div class="backend-content">
+      <div class="backend-loading-shade">
+        <mat-icon class="text-danger">error_outline</mat-icon>
+        <span class="text-danger">&nbsp;Belum tersedia</span>
+      </div>
+    </div>
+    <!-- <button mat-raised-button color="primary">Tambah Project</button>
     <table mat-table [dataSource]="dataSource" class="w-100 backend-table">
       <ng-container matColumnDef="index">
         <th mat-header-cell *matHeaderCellDef> No </th>
@@ -47,6 +52,6 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </table> -->
   </div>
 </div>

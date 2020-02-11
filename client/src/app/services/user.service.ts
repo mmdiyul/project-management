@@ -14,6 +14,7 @@ export class UserService {
   ) { }
 
   endpoint = '/api/user';
+  firstEndpoint = '/api/user';
   getAll(search= '', sort= null, order= null, offset= 0, limit= 5, page = 1) {
     this.endpoint = '/api/user';
     this.endpoint = this.endpoint + '/page/' + page;
@@ -26,15 +27,15 @@ export class UserService {
     return this.http.get<UsersAPI>(url, { params });
   }
   insert(data: User) {
-    const url = this.endpoint;
+    const url = this.firstEndpoint;
     return this.http.post<User>(url, data);
   }
   updateById(id: string, data: User) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.put<User>(url, data);
   }
   removeById(id: string) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.delete<User>(url);
   }
 }

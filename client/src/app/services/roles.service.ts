@@ -13,6 +13,7 @@ export class RolesService {
     private helper: HelpersService
   ) { }
   endpoint = '/api/roles';
+  firstEndpoint = '/api/roles';
   getAll(search= '', sort= null, order= null, offset= 0, limit= 5, page = 1) {
     this.endpoint = '/api/roles';
     this.endpoint = this.endpoint + '/page/' + page;
@@ -25,15 +26,15 @@ export class RolesService {
     return this.http.get<RolesAPI>(url, {params});
   }
   insert(data: Roles) {
-    const url = this.endpoint;
+    const url = this.firstEndpoint;
     return this.http.post<Roles>(url, data);
   }
   updateById(id: string, data: Roles) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.put<Roles>(url, data);
   }
   removeById(id: string) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.delete<Roles>(url);
   }
 }
