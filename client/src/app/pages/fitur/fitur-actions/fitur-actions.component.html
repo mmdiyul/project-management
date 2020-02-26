@@ -22,9 +22,13 @@
                         <th scope="row"><p class="card-text">Nama</p></th>
                         <td><p class="card-text">:</p></td>
                         <td>
-                          <div class="form-group">
-                            <input class="form-control mb-1" type="text" placeholder="Name">
-                          </div>
+                          <mat-form-field class="w-100" appearance="outline">
+                            <mat-label>Nama</mat-label>
+                            <input matInput formControlName="nama" placeholder="Nama">
+                            <mat-error *ngIf="form.get('nama').hasError('required')">
+                              Nama wajib diisi
+                            </mat-error>
+                          </mat-form-field>
                         </td>
                       </tr>
                       <tr>
