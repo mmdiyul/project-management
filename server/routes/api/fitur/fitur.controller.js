@@ -1,4 +1,5 @@
 let Fitur = require('./fitur.model')
+let Vote = require('../vote/vote.model')
 const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
@@ -17,6 +18,7 @@ module.exports = {
     const count = Fitur.countDocuments(where)
     const data = Fitur.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
       .populate('parent', 'nama')
+      .populate('tipeId', 'nama')
       .populate('createdBy', 'nama')
       .populate('updatedBy', 'nama')
 
@@ -73,7 +75,10 @@ module.exports = {
       .catch(error => next(error))
   },
   removeById: (req, res, next) => {
-    Fitur.findOneAndDelete({_id: req.params.id})
+    Promise.all([
+      Fitur.findOneAndDelete({_id: req.params.id}),
+      Vote.deleteMany({fiturId: req.params.id})
+    ])
       .then(fitur => res.json(fitur))
       .catch(error => next(error))
   }

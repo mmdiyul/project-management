@@ -1,4 +1,5 @@
 let Vote = require('./vote.model')
+let Fitur = require('../fitur/fitur.model')
 const { query, parseWhere } = require('../../helpers')
 
 module.exports = {
@@ -21,7 +22,7 @@ module.exports = {
         let urlQuery = url[1].split('?')
         let prevUrl, nextUrl
         if ((urlQuery == "" || urlPage[0] == "") && (urlQuery == "" || urlQuery[1] == null)) {
-          prevUrl = url[0] + "user/page/" + (page - 1)
+          prevUrl = url[0] + "vote/page/" + (page - 1)
           nextUrl = url[0] + "vote/page/" + (page + 1)
         } else {
           prevUrl = url[0] + "vote/page/" + (page - 1) + "?" + urlQuery[1]
@@ -51,23 +52,138 @@ module.exports = {
       .then(vote => res.json(vote))
       .catch(error => next(error))
   },
-  updateById: (req, res,next) => {
-    Vote.findOneAndUpdate(
-      {_id: req.params.id},
-      {$set: req.body},
-      {new: true}
-    )
-      .then(user => res.json(user))
+  updateById: (req, res, next) => {
+    const voteAwal = Vote.findOne({_id: req.params.id})
+    Promise.all([voteAwal])
+      .then(cb => {
+        Vote.findOneAndUpdate(
+          {_id: req.params.id},
+          {$set: req.body},
+          {new: true}
+        )
+          .then(vote => {
+            const allData = Vote.find({fiturId: vote.fiturId})
+            const fitur = Fitur.findOne({_id: vote.fiturId})
+            Promise.all([vote, fitur, allData])
+              .then(cba => {
+                let voteAwalKesulitan = cb[0].kesulitan
+                let voteAwalHarga = cb[0].harga
+                let voteKesulitan = cba[0].kesulitan
+                let voteHarga = cba[0].harga
+                let fiturKesulitan = cba[1].kesulitan
+                let fiturHarga = cba[1].estimasiHarga
+                let jumlahVote = cba[2].length
+
+                let hasilKesulitan = (((fiturKesulitan * jumlahVote) - voteAwalKesulitan) + voteKesulitan) / jumlahVote
+                let hasilHarga = (((fiturHarga * jumlahVote) - voteAwalHarga) + voteHarga) / jumlahVote
+
+                const updateFitur = Fitur.findOneAndUpdate(
+                  {_id: vote.fiturId},
+                  {$set: {kesulitan: hasilKesulitan, estimasiHarga: hasilHarga}},
+                  {new: true}
+                )
+                Promise.all([updateFitur])
+                  .then(cbaf => {
+                    res.json({
+                      voteAwal: cb[0],
+                      vote: cba[0],
+                      fitur: cba[1],
+                      fiturBaru: cbaf[0]
+                    })
+                  })                
+                  .catch(error => next(error))
+              })
+              .catch(error => next(error))
+          })
+          .catch(error => next(error))
+      })
       .catch(error => next(error))
   },
   insert: (req, res, next) => {
     Vote.create({...req.body})
-      .then(vote => res.json(vote))
+      .then(vote => {
+        const allData = Vote.find({fiturId: vote.fiturId})
+        const fitur = Fitur.findOne({_id: vote.fiturId})
+        Promise.all([vote, fitur, allData])
+          .then(cb => {
+            let voteKesulitan = cb[0].kesulitan
+            let voteHarga = cb[0].harga
+            let jumlahData = cb[2].length
+            let fiturKesulitan = cb[1].kesulitan
+            let fiturHarga = cb[1].estimasiHarga
+
+            let hasilKesulitan, hasilHarga
+            
+            if (jumlahData == 1) {
+              hasilKesulitan = (fiturKesulitan + voteKesulitan)
+              hasilHarga = (fiturHarga + voteHarga)
+            } else {
+              hasilKesulitan = ((fiturKesulitan * (jumlahData - 1)) + voteKesulitan) / jumlahData
+              hasilHarga = ((fiturHarga * (jumlahData - 1)) + voteHarga) / jumlahData
+            }
+
+            const updateFitur = Fitur.findOneAndUpdate(
+              {_id: vote.fiturId},
+              {$set: {kesulitan: hasilKesulitan, estimasiHarga: hasilHarga}},
+              {new: true}
+            )
+            Promise.all([updateFitur])
+              .then(cba => {
+                res.json({
+                  vote: cb[0],
+                  fitur: cba[0]
+                })
+              })
+              .catch(error => next(error))
+          })
+          .catch(error => next(error))
+      })
       .catch(error => next(error))
   },
   removeById: (req, res, next) => {
-    Vote.findOneAndDelete({_id: req.params.id})
-      .then(vote => res.json(vote))
-      .catch(error => next(error))
+    const voteAwal = Vote.findOne({_id: req.params.id})
+    Promise.all([voteAwal])
+      .then(cb => {
+        Vote.findOneAndDelete({_id: req.params.id})
+          .then(vote => {
+            const allData = Vote.find({fiturId: vote.fiturId})
+            const fitur = Fitur.findOne({_id: vote.fiturId})
+            Promise.all([fitur, allData])
+              .then(cba => {
+                let voteAwalKesulitan = cb[0].kesulitan
+                let voteAwalHarga = cb[0].harga
+                let fiturKesulitan = cba[0].kesulitan
+                let fiturHarga = cba[0].estimasiHarga
+                let jumlahVote = cba[1].length
+
+                let hasilHarga, hasilKesulitan
+
+                if (jumlahVote == 0) {
+                  hasilKesulitan = 0
+                  hasilHarga = 0
+                } else {
+                  hasilKesulitan = ((fiturKesulitan * (jumlahVote + 1)) - voteAwalKesulitan) / jumlahVote
+                  hasilHarga = ((fiturHarga * (jumlahVote + 1)) - voteAwalHarga) / jumlahVote
+                }
+
+                const updateFitur = Fitur.findOneAndUpdate(
+                  {_id: vote.fiturId},
+                  {$set: {kesulitan: hasilKesulitan, estimasiHarga: hasilHarga}},
+                  {new: true}
+                )
+                Promise.all([updateFitur])
+                  .then(cbaf => {
+                    res.json({
+                      voteAwal: cb[0],
+                      fitur: cba[0],
+                      fiturBaru: cbaf[0]
+                    })
+                  })                
+                  .catch(error => next(error))
+              })
+              .catch(error => next(error))
+          })
+          .catch(error => next(error))
+      })
   }
 }
