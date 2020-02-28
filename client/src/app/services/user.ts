@@ -15,7 +15,7 @@ export interface User {
   updatedAt?: Date;
 }
 
-export  interface UsersAPI {
+export  interface UserAPI {
   results: User[];
   count: number;
   prevUrl: string;

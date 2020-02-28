@@ -28,13 +28,13 @@ export class AuthService {
     login(username: string, password: string) {
       const auth = 'Basic ' + btoa(`${username}:${password}`);
       const headers = new HttpHeaders().append('Authorization', auth);
-      const url = 'http://localhost:3000/auth/login';
+      const url = '/auth/login';
       return this.http.get<Login>(url, {headers});
     }
     logout() {
       localStorage.removeItem(this.localUser);
       localStorage.removeItem(this.localToken);
-      this.http.get('http://localhost:3000/auth/logout').subscribe(() => {
+      this.http.get('/auth/logout').subscribe(() => {
         this.router.navigate(['login']);
       });
     }

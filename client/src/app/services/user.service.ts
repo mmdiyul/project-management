@@ -1,5 +1,5 @@
 import { HelpersService } from './helpers.service';
-import { User, UsersAPI } from './user';
+import { User, UserAPI } from './user';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -24,7 +24,7 @@ export class UserService {
     if (search) {
       params = params.set('search', search);
     }
-    return this.http.get<UsersAPI>(url, { params });
+    return this.http.get<UserAPI>(url, { params });
   }
   insert(data: User) {
     const url = this.firstEndpoint;

@@ -84,7 +84,7 @@ module.exports = {
   },
   loginLocalStrategy: (username, passwd) => {
     return new Promise((resolve, reject)=>{
-      const user = Users.findOne({ $or:[{email:username},{username}] })
+      const user = User.findOne({ $or:[{email:username},{username}] })
       .populate('role')
       .select('id password username email nama roleId')
       user.then((foundUser)=>{
