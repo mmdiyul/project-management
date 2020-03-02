@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatPaginatorModule, MatSelectModule, MatOptionModule } from '@angular/material';
 import { VoteBackendComponent } from './vote.component';
@@ -9,7 +10,8 @@ import { VoteActionComponent } from './vote-action/vote-action.component';
 const routes: Routes = [
   {
     path: '',
-    component: VoteBackendComponent
+    component: VoteBackendComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

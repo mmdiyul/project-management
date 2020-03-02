@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private helper: HelpersService
     // public dialogRef: MatDialogRef<UserActionsComponent>,
     // @Inject(MAT_DIALOG_DATA) public md: any
   ) {
@@ -61,7 +62,9 @@ export class RegisterComponent implements OnInit {
       this.form.reset();
       const route = '/login';
       this.router.navigate([route]);
-   });
+    }, err => {
+      this.helper.sbError(err.message, 'Register Gagal!');
+    });
   }
 
 }

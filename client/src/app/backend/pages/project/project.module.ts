@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../services/auth.guard';
 import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule } from '@angular/material';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectBackendComponent } from './project.component';
@@ -8,7 +9,8 @@ import { ProjectActionComponent } from './project-action/project-action.componen
 const routes: Routes = [
   {
     path: '',
-    component: ProjectBackendComponent
+    component: ProjectBackendComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

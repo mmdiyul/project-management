@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../services/auth.guard';
 import { MatTableModule, MatButtonModule, MatIconModule, MatMenuModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatProgressSpinnerModule, MatPaginatorModule } from '@angular/material';
 import { UserBackendComponent } from './user.component';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   {
     path: '',
-    component: UserBackendComponent
+    component: UserBackendComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatPaginatorModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import { ReportBackendComponent } from './report.component';
@@ -9,7 +10,8 @@ import { ReportActionComponent } from './report-action/report-action.component';
 const routes: Routes = [
   {
     path: '',
-    component: ReportBackendComponent
+    component: ReportBackendComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSpinner, MatPaginatorModule, MatProgressSpinnerModule, MatSelectModule, MatOptionModule } from '@angular/material';
 import { FiturBackendComponent } from './fitur.component';
@@ -9,7 +10,8 @@ import { FiturActionComponent } from './fitur-action/fitur-action.component';
 const routes: Routes = [
   {
     path: '',
-    component: FiturBackendComponent
+    component: FiturBackendComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

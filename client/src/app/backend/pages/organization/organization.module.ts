@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../../services/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule, MatIconModule, MatButtonModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatProgressSpinnerModule, MatPaginatorModule } from '@angular/material';
 import { OrganizationBackendComponent } from './organization.component';
@@ -9,7 +10,8 @@ import { OrganizationActionComponent } from './organization-action/organization-
 const routes: Routes = [
   {
     path: '',
-    component: OrganizationBackendComponent
+    component: OrganizationBackendComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
