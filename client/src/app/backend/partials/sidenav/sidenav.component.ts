@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -25,7 +26,10 @@ export class SidenavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private auth: AuthService
+  ) {}
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
@@ -71,6 +75,12 @@ export class SidenavComponent {
         hide: false,
       },
     ];
+  }
+
+  logout() {
+    setTimeout(() => {
+      this.auth.logout();
+    }, 500);
   }
 
 }
