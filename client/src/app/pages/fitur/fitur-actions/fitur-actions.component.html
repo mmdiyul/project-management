@@ -10,99 +10,62 @@
       </h2>
 
       <!-- Blog Post -->
-      <div class="card mb-3 col-md mt-2 bg-light fitur">
-        <div class="row no-gutters">
-          <div class="col-md">
-            <div class="card-body">
-              <form>
-                <div class="row">
-                  <table class="table table-borderless">
-                    <tbody>
-                      <tr>
-                        <th scope="row"><p class="card-text">Nama</p></th>
-                        <td><p class="card-text">:</p></td>
-                        <td>
-                          <mat-form-field class="w-100" appearance="outline">
-                            <mat-label>Nama</mat-label>
-                            <input matInput formControlName="nama" placeholder="Nama">
-                            <mat-error *ngIf="form.get('nama').hasError('required')">
-                              Nama wajib diisi
-                            </mat-error>
-                          </mat-form-field>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><p class="card-text">Gambar</p></th>
-                        <td><p class="card-text">:</p></td>
-                        <td>
-                          <div class="form-group">
-                            <svg class="bd-placeholder-img justify-items-center mb-2" width="90%" height="200" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><p class="card-text">Deskripsi</p></th>
-                        <td><p class="card-text">:</p></td>
-                        <td>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" width="100%"></textarea>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><p class="card-text">Tipe</p></th>
-                        <td><p class="card-text">:</p></td>
-                        <td>
-                          <div class="form-group">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                              <option>Frontend</option>
-                              <option>Backend</option>
-                              <option>Design</option>
-                              <option>API</option>
-                              <option>Database</option>
-                              <option>Others..</option>
-                            </select>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><p class="card-text">Waktu Pengerjaan</p></th>
-                        <td><p class="card-text">:</p></td>
-                        <td>
-                          <div class="form-group">
-                            <div class="row">
-                              <div class="col-3">
-                                <input class="form-control" type="number">
-                              </div>
-                              <div class="col-9 mt-2">
-                                <p class="card-text"><strong>Jam</strong></p>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><p class="card-text">Kesulitan</p></th>
-                        <td><p class="card-text">:</p></td>
-                        <td><mat-slider></mat-slider></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><p class="card-text">Estimasi Harga</p></th>
-                        <td><p class="card-text">:</p></td>
-                        <td><mat-slider
-                          thumbLabel
-                          min="10000"
-                          max="1000000"></mat-slider></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <mat-card-actions class="m-0">
-                  <button mat-flat-button class="btn-block btn-primary">VOTE NOW</button>
-                </mat-card-actions>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div class="mb-3 col-md mt-2">
+        <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Nama</mat-label>
+              <input matInput formControlName="nama" placeholder="Nama">
+              <mat-error *ngIf="form.get('nama').hasError('required')">
+                Nama wajib diisi
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Deskripsi</mat-label>
+              <textarea matInput formControlName="deskripsi" placeholder="Deskripsi" rows="2"></textarea>
+              <mat-error *ngIf="form.get('deskripsi').hasError('required')">
+                Deskripsi wajib diisi
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Waktu Pengerjaan</mat-label>
+              <input matInput formControlName="waktuPengerjaan" placeholder="Waktu Pengerjaan" type="number">
+              <mat-error *ngIf="form.get('waktuPengerjaan').hasError('required')">
+                Waktu pengerjaan wajib diisi
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Tingkat Kesulitan</mat-label>
+              <input matInput formControlName="kesulitan" placeholder="Tingkat Kesulitan" type="number">
+              <mat-error *ngIf="form.get('kesulitan').hasError('required')">
+                Tingkat kesulitan wajib diisi
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Estimasi Harga</mat-label>
+              <input matInput formControlName="estimasiHarga" placeholder="Estimasi Harga" type="number">
+              <mat-error *ngIf="form.get('estimasiHarga').hasError('required')">
+                Estimasi harga wajib diisi
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Tipe</mat-label>
+              <mat-select formControlName="tipeId">
+                <mat-option *ngFor="let tipe of tipeList" [value]="tipe._id">
+                  {{ tipe.nama }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Parent Fitur</mat-label>
+              <mat-select formControlName="parent">
+                <mat-option *ngFor="let fitur of fiturList" [value]="fitur._id">
+                  {{ fitur.nama }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-raised-button class="mx-auto mt-1 btn btn-block" color="primary" type="submit" [disabled]="form.invalid">Simpan</button>
+        </form>
+
       </div>
 
 

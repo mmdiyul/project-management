@@ -3,12 +3,12 @@
   <div class="col-4 shadow login-page">
       <div class="login-form">
         <span style="font-size: x-large;">Daftar Akun</span>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mt-2">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="mt-2">
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Nama</mat-label>
             <input matInput placeholder="Name" formControlName="name" autocomplete="off">
             <mat-icon matSuffix>accessibility</mat-icon>
-            <mat-error *ngIf="name.invalid">Nama harus diisi</mat-error>
+            <mat-error *ngIf="nama.invalid">Nama harus diisi</mat-error>
           </mat-form-field>
           <mat-form-field class="w-100" appearance="outline">
             <mat-label>Email</mat-label>
@@ -28,7 +28,7 @@
             <mat-icon matSuffix>fingerprint</mat-icon>
             <mat-error *ngIf="password.invalid">Password harus diisi</mat-error>
           </mat-form-field>
-          <button mat-raised-button type="submit" color="accent" class="w-100" [disabled]="loginForm.invalid">Masuk</button>
+          <button mat-raised-button type="submit" color="accent" class="w-100" [disabled]="registerForm.invalid">Daftar</button>
         </form>
       </div>
   </div>

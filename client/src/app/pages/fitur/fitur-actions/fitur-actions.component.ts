@@ -1,8 +1,12 @@
+import { Routes, Router } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActionsComponent } from 'src/app/backend/pages/role/actions/actions.component';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { FiturService } from 'src/app/services/fitur.service';
+import { TipeService } from 'src/app/services/tipe.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fitur-actions',
@@ -13,39 +17,52 @@ export class FiturActionsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<ActionsComponent>,
-    @Inject(MAT_DIALOG_DATA) public md: any
+    private fiturService: FiturService,
+    private tipeService: TipeService,
+    private router: Router
+    // public dialogRef: MatDialogRef<FiturActionsComponent>,
+    // @Inject(MAT_DIALOG_DATA) public md: any
   ) {
-    this.dialogTitle = 'Tambah Role';
     this.form = this.fb.group({
       nama: ['', Validators.required],
       deskripsi: ['', Validators.required],
-      prioritas: [2, Validators.required]
+      waktuPengerjaan: ['', Validators.required],
+      kesulitan: ['', Validators.required],
+      estimasiHarga: ['', Validators.required],
+      tipeId: ['', Validators.required],
+      parent: [null]
     });
-    if (this.md.data) {
-      const { nama, deskripsi, prioritas } = this.md.data;
-      this.form.setValue({nama, deskripsi, prioritas});
-      this.dialogTitle = 'Edit Role (' + nama + ')';
+    this.dialogTitle = 'Tambah Fitur';
+    this.fiturService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
+      this.fiturList = results;
+    });
+    this.tipeService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
+      this.tipeList = results;
+    });
+    // if (this.md.data) {
+    //   const { nama, deskripsi, waktuPengerjaan, kesulitan, estimasiHarga, tipeId, parent } = this.md.data;
+    //   this.form.setValue({ nama, deskripsi, waktuPengerjaan, kesulitan, estimasiHarga, tipeId, parent });
+    //   this.dialogTitle = 'Edit Fitur (' + nama + ')';
+    // }
+  }
+
+
+    form: FormGroup;
+    subject = new Subject();
+    subs = new Subscription();
+    dialogTitle = '';
+    fiturList = [];
+    tipeList = [];
+
+    ngOnInit() {
     }
-  }
 
-  form: FormGroup;
-  subs = new Subscription();
-  dialogTitle = '';
-
-  ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe();
-  }
-
-  closeDialog() {
-    this.dialogRef.close();
-  }
-
-  onSubmit() {
-    this.dialogRef.close(this.form.value);
-  }
+    onSubmit() {
+      this.fiturService.insert(this.form.value).pipe(takeUntil(this.subject)).subscribe(results => {
+        this.form.reset();
+        const route = '/fitur';
+        this.router.navigate([route]);
+      });
+      }
 
 }

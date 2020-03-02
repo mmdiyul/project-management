@@ -13,7 +13,7 @@
         <div class="card mb-3 col-md mt-2 bg-light fitur" *ngFor="let item of dataSource">
           <div class="row no-gutters">
             <div class="col-md-3">
-              <svg class="bd-placeholder-img" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+              <svg class="bd-placeholder-img" width="100%" height="150" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
             </div>
             <div class="col-md-7">
               <div class="card-body">
@@ -27,7 +27,7 @@
               <mat-progress-bar class="mb-3" mode="determinate" *ngIf="item.kesulitan" value="{{item.kesulitan}}"></mat-progress-bar>
                 <h6 class="" *ngIf="item.estimasiHarga">Rp.  {{item.estimasiHarga}} </h6>
                 <mat-card-actions class="m-0">
-                  <a [routerLink]="['/fitur/detail']"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
+                  <a [routerLink]="['/fitur/detail',item.slug]"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
                 </mat-card-actions>
             </div>
           </div>
@@ -106,14 +106,8 @@
                   <a [routerLink]="['/fitur-action']"><button mat-flat-button class="btn-block btn-primary">Add Features</button></a>
                 </mat-card-actions>
               </li>
-              <li class="mt-2">
-                <a href="#">Login</a>
-              </li>
-              <li>
-                <a href="#">Landing Page</a>
-              </li>
-              <li>
-                <a href="#">Register</a>
+              <li class="mt-2" *ngFor="let item of dataSource">
+                <a [routerLink]="['/fitur/detail',item.slug]" *ngIf="item.nama">{{item.nama}}</a>
               </li>
             </ul>
           </div>

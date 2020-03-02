@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ListFiturComponent } from 'src/app/partials/list-fitur/list-fitur.component';
-import { MatSliderModule, MatFormFieldModule, MatLabel, MatInputModule } from '@angular/material';
+import { MatSliderModule, MatFormFieldModule, MatLabel, MatInputModule, MatSelectModule, MatDialogModule } from '@angular/material';
 import { FiturActionsComponent } from './fitur-actions/fitur-actions.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -39,11 +39,13 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
     ListFiturModule,
     MatButtonModule,
     MatPaginatorModule,
     MatProgressBarModule,
     MatCardModule,
+    MatSelectModule,
     MatSliderModule,
     RouterModule.forChild(routes)
   ],
