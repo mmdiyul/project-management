@@ -1,10 +1,11 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { HelpersService } from 'src/app/services/helpers.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormStateMatcher } from 'src/app/services/form-state-matcher';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -15,62 +16,52 @@ import { takeUntil } from 'rxjs/operators';
 export class RegisterComponent implements OnInit {
 
   constructor(
-    private formBuilder: FormBuilder,
-    private auth: AuthService,
-    private helper: HelpersService,
-    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private userService: UserService,
     private router: Router
+    // public dialogRef: MatDialogRef<UserActionsComponent>,
+    // @Inject(MAT_DIALOG_DATA) public md: any
   ) {
-    this.registerForm = this.formBuilder.group({
+    this.form = this.fb.group({
       nama: ['', Validators.required],
-      email: ['', Validators.email, Validators.required],
       username: ['', Validators.required],
+      email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required]
     });
+    // this.dialogTitle = 'Tambah Pengguna';
+    // this.rolesService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
+    //   this.rolesList = results;
+    // });
+    // this.organizationService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
+    //   this.organizationList = results;
+    // });
+    // if (this.md.data) {
+    //   const { nama, username, email, password, roleId, organizationId } = this.md.data;
+    //   this.form.setValue({nama, username, email, password, roleId: roleId._id, organizationId: organizationId ? organizationId._id : null});
+    //   this.dialogTitle = 'Edit Pengguna (' + nama + ')';
+    // }
   }
 
-  get nama() {
-    return this.registerForm.get('nama');
-  }
-
-  get email() {
-    return this.registerForm.get('email');
-  }
-
-  get username() {
-    return this.registerForm.get('username');
-  }
-  get password() {
-    return this.registerForm.get('password');
-  }
-
-  registerForm: FormGroup;
-  fm = new FormStateMatcher();
-  private unsubs = new Subject();
+  form: FormGroup;
+  subject = new Subject();
+  subs = new Subscription();
+  rolesList = [];
+  organizationList = [];
+  dialogTitle = '';
 
   ngOnInit() {
   }
 
-  ngOnDestroy(): void {
-    this.unsubs.next();
-    this.unsubs.complete();
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 
   onSubmit() {
-    this.auth.login(this.registerForm.get('username').value, this.registerForm.get('password').value).pipe(takeUntil(this.unsubs))
-    .subscribe(res => {
-      localStorage.setItem(this.auth.localUser, JSON.stringify(res.user));
-      localStorage.setItem(this.auth.localToken, res.token);
-      this.activatedRoute.queryParams.pipe(takeUntil(this.unsubs))
-      .subscribe(params => {
-        const route = params.returnUrl ? params.returnUrl : '/backend/dashboard';
-        setTimeout(() => {
-          this.router.navigate([route]);
-        }, 500);
-      });
-    }, err => {
-      this.helper.sbError(err.message, 'Login gagal');
-    });
+    this.userService.insert(this.form.value).pipe(takeUntil(this.subject)).subscribe(results => {
+      this.form.reset();
+      const route = '/login';
+      this.router.navigate([route]);
+   });
   }
 
 }
