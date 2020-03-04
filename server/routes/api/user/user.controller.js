@@ -85,7 +85,7 @@ module.exports = {
   loginLocalStrategy: (username, passwd) => {
     return new Promise((resolve, reject)=>{
       const user = User.findOne({ $or:[{email:username},{username}] })
-      .populate('role')
+      .populate('roleId')
       .select('id password username email nama roleId')
       user.then((foundUser)=>{
         if(!foundUser) return reject(createError(400,'Username atau Email tidak ditemukan!'))
