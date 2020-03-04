@@ -1,5 +1,3 @@
-import { RolesService } from './../../services/roles.service';
-import { UserService } from './../../services/user.service';
 import { HelpersService } from './../../services/helpers.service';
 import { FormStateMatcher } from './../../services/form-state-matcher';
 import { AuthService } from './../../services/auth.service';
@@ -8,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { User } from 'src/app/services/user';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +26,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.currentUser = this.helper.currentUser();
+    if (this.currentUser !== null) {
+      if (this.currentUser.roleId.nama === 'superadmin' || this.currentUser.roleId.nama === 'admin') {
+        this.router.navigate(['/backend/dashboard']);
+      } else if (this.currentUser.roleId.nama === 'developer') {
+        this.router.navigate(['/home']);
+      }
+    }
   }
 
   get username() {
@@ -36,6 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.loginForm.get('password');
   }
 
+  currentUser: User;
   loginForm: FormGroup;
   fm = new FormStateMatcher();
   private unsubs = new Subject();
@@ -55,9 +63,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       localStorage.setItem(this.auth.localToken, res.token);
       this.activatedRoute.queryParams.pipe(takeUntil(this.unsubs))
       .subscribe(params => {
-        const route = params.returnUrl ? params.returnUrl : '/backend/dashboard';
+        const routeAdmin = params.returnUrl ? params.returnUrl : '/backend/dashboard';
+        const routeDeveloper = params.returnUrl ? params.returnUrl : '/home';
         setTimeout(() => {
-          this.router.navigate([route]);
+          const role = JSON.parse(localStorage.getItem(this.auth.localUser)).roleId.nama;
+          if (role === 'developer') {
+            this.router.navigate([routeDeveloper]);
+          } else {
+            this.router.navigate([routeAdmin]);
+          }
         }, 500);
       });
     }, err => {

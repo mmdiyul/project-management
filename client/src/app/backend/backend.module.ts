@@ -1,3 +1,4 @@
+import { AuthGuard } from './../services/auth.guard';
 import { RemoveDialogModule } from './partials/remove-dialog/remove-dialog.module';
 import { Routes, RouterModule } from '@angular/router';
 import { SidenavModule } from './partials/sidenav/sidenav.module';
@@ -18,6 +19,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',

@@ -6,11 +6,11 @@
     <mat-toolbar color="primary" class="shadow">Menu</mat-toolbar>
     <div class="d-flex flex-column align-items-center justify-content-center p-3 text-break text-center">
       <div class="rounded-circle bg-primary" style="width: 100px; height: 100px;"></div>
-      <strong class="mt-2">John Doe</strong>
-      <span>Super Admin</span>
+      <strong class="mt-2">{{currentUser.nama}}</strong>
+      <span>{{currentUser.roleId.nama}}</span>
     </div>
-    <mat-nav-list *ngFor="let menu of menus" class="mb-2">
-      <a mat-list-item [routerLink]="menu.url" routerLinkActive="active">{{ menu.name }}</a>
+    <mat-nav-list *ngFor="let menu of menus">
+      <a mat-list-item *ngIf="!menu.hide" [routerLink]="menu.url" routerLinkActive="active">{{ menu.name }}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

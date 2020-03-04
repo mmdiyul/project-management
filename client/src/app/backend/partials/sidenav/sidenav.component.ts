@@ -1,3 +1,5 @@
+import { HelpersService } from './../../../services/helpers.service';
+import { User } from './../../../services/user';
 import { AuthService } from './../../../services/auth.service';
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -19,6 +21,8 @@ export interface Menu {
 export class SidenavComponent {
 
   menus: Menu[];
+  currentUser: User;
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -28,11 +32,15 @@ export class SidenavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+    private helper: HelpersService
+  ) {
+    this.currentUser = this.helper.currentUser();
+  }
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
+    const role = JSON.parse(localStorage.getItem(this.auth.localUser)).roleId.nama;
     this.menus = [
       {
         name: 'Dashboard',
@@ -62,7 +70,7 @@ export class SidenavComponent {
       {
         name: 'Pengguna',
         url: '/backend/user',
-        hide: false,
+        hide: (this.currentUser.roleId.prioritas > 0 ) ? true : false
       },
       {
         name: 'Organisasi',
@@ -72,7 +80,7 @@ export class SidenavComponent {
       {
         name: 'Role',
         url: '/backend/role',
-        hide: false,
+        hide: (this.currentUser.roleId.prioritas > 0 ) ? true : false
       },
     ];
   }
