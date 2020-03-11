@@ -1,3 +1,4 @@
+import { User } from 'src/app/services/user';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -29,6 +30,14 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required]
     });
+    this.currentUser = this.helper.currentUser();
+    if (this.currentUser !== null) {
+      if (this.currentUser.roleId.nama === 'superadmin' || this.currentUser.roleId.nama === 'admin') {
+        this.router.navigate(['/backend/dashboard']);
+      } else if (this.currentUser.roleId.nama === 'developer') {
+        this.router.navigate(['/home']);
+      }
+    }
     // this.dialogTitle = 'Tambah Pengguna';
     // this.rolesService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
     //   this.rolesList = results;
@@ -49,6 +58,7 @@ export class RegisterComponent implements OnInit {
   rolesList = [];
   organizationList = [];
   dialogTitle = '';
+  currentUser: User;
 
   ngOnInit() {
   }

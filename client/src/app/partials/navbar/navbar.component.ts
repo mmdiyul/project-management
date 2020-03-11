@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     setTimeout(() => {
+      localStorage.setItem('reload', 'yes');
       this.auth.logout();
     }, 500);
   }

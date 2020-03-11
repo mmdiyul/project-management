@@ -10,6 +10,10 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (localStorage.getItem('reload')) {
+      window.location.reload();
+      localStorage.removeItem('reload');
+    }
   }
 
 }

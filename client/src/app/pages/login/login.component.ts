@@ -49,6 +49,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   private unsubs = new Subject();
 
   ngOnInit() {
+    if (localStorage.getItem('reload')) {
+      window.location.reload();
+      localStorage.removeItem('reload');
+    }
   }
 
   ngOnDestroy(): void {
@@ -61,6 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     .subscribe(res => {
       localStorage.setItem(this.auth.localUser, JSON.stringify(res.user));
       localStorage.setItem(this.auth.localToken, res.token);
+      localStorage.setItem('reload', 'yes');
       this.activatedRoute.queryParams.pipe(takeUntil(this.unsubs))
       .subscribe(params => {
         const routeAdmin = params.returnUrl ? params.returnUrl : '/backend/dashboard';
