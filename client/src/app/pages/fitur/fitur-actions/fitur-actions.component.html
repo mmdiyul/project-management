@@ -97,14 +97,8 @@
         <h5 class="card-header">Your Feature</h5>
         <div class="card-body">
           <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#">Login</a>
-            </li>
-            <li>
-              <a href="#">Landing Page</a>
-            </li>
-            <li>
-              <a href="#">Register</a>
+            <li class="mt-2" *ngFor="let item of dataSource">
+              <a [routerLink]="['/fitur/detail',item.slug]" *ngIf="item.nama">{{item.nama}}</a>
             </li>
           </ul>
         </div>

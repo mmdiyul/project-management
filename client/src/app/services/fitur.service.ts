@@ -25,6 +25,10 @@ export class FiturService {
     }
     return this.http.get<FiturAPI>(url, { params });
   }
+  getById(id: string) {
+    const url = `${this.endpoint}/${id}`;
+    return this.http.get<Fitur>(url);
+  }
   insert(data: Fitur) {
     const url = this.firstEndpoint;
     return this.http.post<Fitur>(url, data);

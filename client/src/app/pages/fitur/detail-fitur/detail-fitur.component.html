@@ -10,10 +10,10 @@
       </h2>
 
       <!-- Blog Post -->
-      <div class="card mb-3 col-md mt-2 bg-light fitur">
+      <div class="card mb-3 col-md mt-2 bg-light fitur" *ngIf="dataSource">
         <div class="row no-gutters">
           <div class="col-md">
-            <h5 class="text-center">Fitur Login Register</h5>
+            <h5 class="text-center" *ngIf="dataSource.nama"> {{dataSource.nama}} </h5>
             <svg class="bd-placeholder-img justify-items-center mt-1" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
             <div class="card-body">
               <div class="row">
@@ -22,32 +22,32 @@
                     <tr>
                       <th scope="row"><p class="card-text">Authors</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text">Administrator</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.createdBy">{{dataSource.createdBy}}</p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Deskripsi</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet neque sapien, id dignissim risus faucibus a. Proin neque nulla, semper eget lorem sed, interdum ornare elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.deskripsi">{{dataSource.deskripsi}}</p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Tipe</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text">Backend</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.tipeId">{{dataSource.tipeId}}</p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Waktu Pengerjaan</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text">5 Jam</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.waktuPengerjaan">{{dataSource.waktuPengerjaan}}</p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Kesulitan</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text"><mat-progress-bar class="mt-2" mode="determinate" value="40"></mat-progress-bar></p></td>
+                      <td><p class="card-text"><mat-progress-bar class="mt-2" mode="determinate" value="{{dataSource.kesulitan}}" *ngIf="dataSource.kesulitan"></mat-progress-bar></p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Estimasi Harga</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text">Rp. 250.000,00</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.estimasiHarga">Rp. {{dataSource.estimasiHarga}}</p></td>
                     </tr>
                   </tbody>
                 </table>
@@ -59,23 +59,24 @@
       <div class="card my-4">
         <h5 class="card-header">Explore Feature</h5>
         <div class="card-body">
-          <table class="table table-borderless">
-            <tbody>
-              <tr>
-                <th scope="row" class="mt-2">Kesulitan</th>
-                <td><mat-slider></mat-slider></td>
-              </tr>
-              <tr>
-                <th scope="row">Estimasi Harga</th>
-                <td><mat-slider
-                  thumbLabel
-                  min="10000"
-                  max="1000000"></mat-slider></td>
-              </tr>
-            </tbody>
-          </table>
+          <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Waktu Pengerjaan</mat-label>
+              <input matInput formControlName="waktuPengerjaan" placeholder="Waktu Pengerjaan" type="number">
+              <mat-error *ngIf="form.get('waktuPengerjaan').hasError('required')">
+                Waktu pengerjaan wajib diisi
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Estimasi Harga</mat-label>
+              <input matInput formControlName="estimasiHarga" placeholder="Estimasi Harga" type="number">
+              <mat-error *ngIf="form.get('estimasiHarga').hasError('required')">
+                Estimasi harga wajib diisi
+              </mat-error>
+            </mat-form-field>
+        </form>
           <mat-card-actions class="m-0">
-            <button mat-flat-button class="btn-block btn-primary">VOTE NOW</button>
+            <button mat-raised-button class="mx-auto mt-1 btn btn-block" color="primary" type="submit" [disabled]="form.invalid">VOTE</button>
           </mat-card-actions>
         </div>
       </div>

@@ -46,7 +46,10 @@ export class FiturActionsComponent implements OnInit {
     // }
   }
 
-
+    dataSource = [];
+    countDataSearch = 0;
+    isLoadingResults = true;
+    resultsLength = 0;
     form: FormGroup;
     subject = new Subject();
     subs = new Subscription();
@@ -55,6 +58,7 @@ export class FiturActionsComponent implements OnInit {
     tipeList = [];
 
     ngOnInit() {
+      this.getData();
     }
 
     onSubmit() {
@@ -65,4 +69,17 @@ export class FiturActionsComponent implements OnInit {
       });
       }
 
+      getData() {
+        this.isLoadingResults = true;
+        this.fiturService.getAll()
+          .subscribe(({count, results}) => {
+            this.dataSource = results;
+            this.resultsLength = count;
+            this.isLoadingResults = false;
+            this.countDataSearch = results.length;
+          }, (err) => {
+            this.isLoadingResults = false;
+            console.log(err);
+          });
+        }
 }

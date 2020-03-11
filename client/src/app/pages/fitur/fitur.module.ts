@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'detail',
+        path: 'detail/:id',
         component: DetailFiturComponent,
       },
       {

@@ -27,7 +27,7 @@
               <mat-progress-bar class="mb-3" mode="determinate" *ngIf="item.kesulitan" value="{{item.kesulitan}}"></mat-progress-bar>
                 <h6 class="" *ngIf="item.estimasiHarga">Rp.  {{item.estimasiHarga}} </h6>
                 <mat-card-actions class="m-0">
-                  <a [routerLink]="['/fitur/detail',item.slug]"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
+                  <a [routerLink]="['/fitur/detail', item._id]"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>
                 </mat-card-actions>
             </div>
           </div>
