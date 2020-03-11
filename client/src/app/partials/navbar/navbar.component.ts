@@ -1,3 +1,6 @@
+import { AuthService } from './../../services/auth.service';
+import { HelpersService } from './../../services/helpers.service';
+import { User } from 'src/app/services/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   public isMenuCollapsed: true;
+  currentUser: User;
 
-  constructor() { }
+  constructor(
+    private helper: HelpersService,
+    private auth: AuthService
+  ) {
+    this.currentUser = this.helper.currentUser();
+  }
 
   ngOnInit() {
+  }
+
+  logout() {
+    setTimeout(() => {
+      this.auth.logout();
+    }, 500);
   }
 
 }

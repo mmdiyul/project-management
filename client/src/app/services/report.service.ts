@@ -14,6 +14,7 @@ export class ReportService {
   ) { }
 
   endpoint = '/api/report';
+  firstEndpoint = '/api/report';
   getAll(search= '', sort= null, order= null, offset= 0, limit= 5, page = 1) {
     this.endpoint = '/api/report';
     this.endpoint = this.endpoint + '/page/' + page;
@@ -26,15 +27,15 @@ export class ReportService {
     return this.http.get<ReportAPI>(url, {params});
   }
   insert(data: Report) {
-    const url = this.endpoint;
+    const url = this.firstEndpoint;
     return this.http.post<Report>(url, data);
   }
   updateById(id: string, data: Report) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.put<Report>(url, data);
   }
   removeById(id: string) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.delete<Report>(url);
   }
 }
