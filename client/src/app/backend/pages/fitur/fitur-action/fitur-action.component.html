@@ -22,14 +22,14 @@
         Waktu pengerjaan wajib diisi
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="w-100" appearance="outline">
+    <mat-form-field class="w-100" appearance="outline" *ngIf="!this.add">
       <mat-label>Tingkat Kesulitan</mat-label>
       <input matInput formControlName="kesulitan" placeholder="Tingkat Kesulitan" type="number">
       <mat-error *ngIf="form.get('kesulitan').hasError('required')">
         Tingkat kesulitan wajib diisi
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="w-100" appearance="outline">
+    <mat-form-field class="w-100" appearance="outline" *ngIf="!this.add">
       <mat-label>Estimasi Harga</mat-label>
       <input matInput formControlName="estimasiHarga" placeholder="Estimasi Harga" type="number">
       <mat-error *ngIf="form.get('estimasiHarga').hasError('required')">

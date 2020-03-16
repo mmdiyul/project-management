@@ -40,6 +40,7 @@ export class FiturActionComponent implements OnInit {
       const { nama, deskripsi, waktuPengerjaan, kesulitan, estimasiHarga, tipeId, parent } = this.md.data;
       this.form.setValue({ nama, deskripsi, waktuPengerjaan, kesulitan, estimasiHarga, tipeId, parent });
       this.dialogTitle = 'Edit Fitur (' + nama + ')';
+      this.add = false;
     }
   }
 
@@ -49,6 +50,7 @@ export class FiturActionComponent implements OnInit {
   dialogTitle = '';
   fiturList = [];
   tipeList = [];
+  add = true;
 
   ngOnInit() {
   }

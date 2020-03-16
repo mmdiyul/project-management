@@ -13,10 +13,12 @@ module.exports = {
     if(search){
       where['$or'] = [{
         nama: {'$regex': search, '$options': 'i'}
+      },{
+        deskripsi: {'$regex': search, '$options': 'i'}
       }]
     }
     const count = Fitur.countDocuments(where)
-    const data = Fitur.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
+    const data = Fitur.find(where).limit(limit).skip(offset).sort(sort)
       .populate('parent', 'nama')
       .populate('tipeId', 'nama')
       .populate('createdBy', 'nama')

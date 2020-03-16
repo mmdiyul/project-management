@@ -19,12 +19,14 @@ const fiturSchema = Schema({
   kesulitan: {
     type: Number,
     required: true,
-    select: true
+    select: true,
+    default: 0
   },
   estimasiHarga: {
     type: Number,
     required: true,
-    select: true
+    select: true,
+    default: 0
   },
   tipeId: {
     type: Schema.Types.ObjectId, 

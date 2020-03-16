@@ -23,8 +23,8 @@
               </div>
             </div>
             <div class="col-md-2 mt-auto">
-              <label for="progress">Difficult</label>
-              <mat-progress-bar class="mb-3" mode="determinate" *ngIf="item.kesulitan" value="{{item.kesulitan}}"></mat-progress-bar>
+              <label for="progress">Difficulty {{ item.kesulitan * 10 }}%</label>
+              <mat-progress-bar class="mb-3" mode="determinate" *ngIf="item.kesulitan" value="{{item.kesulitan * 10}}"></mat-progress-bar>
                 <h6 class="" *ngIf="item.estimasiHarga">Rp.  {{item.estimasiHarga}} </h6>
                 <mat-card-actions class="m-0">
                   <a [routerLink]="['/fitur/detail', item._id]"><button mat-flat-button class="btn-block btn-success">VOTE</button></a>

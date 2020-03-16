@@ -87,7 +87,7 @@ export class FiturBackendComponent implements OnInit {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubs.next();
     this.unsubs.complete();
   }
