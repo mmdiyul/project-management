@@ -7,8 +7,8 @@ const { protect, checkQuery, checkSchema, checkId, validationResult } = require(
 router.get('/', checkQuery, projectFiturController.findAll)
 router.get('/page/:page', checkQuery, projectFiturController.findAll)
 router.get('/:id', checkId, projectFiturController.findById)
-router.post('/', checkSchema(schema), validationResult, projectFiturController.insert)
-router.put('/:id', checkId, projectFiturController.updateById)
-router.delete('/:id', checkId, projectFiturController.removeById)
+router.post('/',protect, checkSchema(schema), validationResult, projectFiturController.insert)
+router.put('/:id',protect, checkId, projectFiturController.updateById)
+router.delete('/:id',protect, checkId, projectFiturController.removeById)
 
 module.exports = router

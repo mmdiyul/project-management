@@ -8,9 +8,11 @@
     "server": "DEBUG=project-management:* node ./bin/www",
     "dev": "NODE_ENV=development npm-run-all server",
     "win": "SET NODE_ENV=development npm-run-all server",
-    "prod": "NODE_ENV=production npm-run-all server"
+    "prod": "NODE_ENV=production npm-run-all server",
+    "test": "mocha"
   },
   "dependencies": {
+    "angular-slug": "0.0.4",
     "bcrypt": "^3.0.7",
     "chalk": "^3.0.0",
     "compression": "^1.7.4",
