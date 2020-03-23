@@ -68,16 +68,20 @@ module.exports = {
       .catch(error => next(error))
   },
   updateById: (req, res, next) => {
+    const data = req.body
+    data.updatedBy = req.user._id
     User.findOneAndUpdate(
       {_id: req.params.id},
-      {$set: req.body},
+      {$set: data},
       {new: true}
     )
       .then(user => res.json(user))
       .catch(error => next(error))
   },
   insert: (req, res, next) => {
-    const newUser = createNewUser(req.body)
+    const data = req.body
+    data.createdBy = req.user._id
+    const newUser = createNewUser(data)
     newUser
       .then(user => res.json(user))
       .catch(error => next(error))

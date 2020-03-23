@@ -53,12 +53,14 @@ module.exports = {
       .catch(error => next(error))
   },
   updateById: (req, res, next) => {
+    const data = req.body
+    data.userId = req.user._id
     const voteAwal = Vote.findOne({_id: req.params.id})
     Promise.all([voteAwal])
       .then(cb => {
         Vote.findOneAndUpdate(
           {_id: req.params.id},
-          {$set: req.body},
+          {$set: data},
           {new: true}
         )
           .then(vote => {
@@ -100,7 +102,9 @@ module.exports = {
       .catch(error => next(error))
   },
   insert: (req, res, next) => {
-    Vote.create({...req.body})
+    const data = req.body
+    data.userId = req.user._id
+    Vote.create({...data})
       .then(vote => {
         const allData = Vote.find({fiturId: vote.fiturId})
         const fitur = Fitur.findOne({_id: vote.fiturId})

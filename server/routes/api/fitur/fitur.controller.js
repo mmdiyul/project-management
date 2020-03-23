@@ -63,16 +63,20 @@ module.exports = {
       .catch(error => next(error))
   },
   updateById: (req, res, next) => {
+    const data = req.body
+    data.updatedBy = req.user._id
     Fitur.findOneAndUpdate(
       {_id: req.params.id},
-      {$set: req.body},
+      {$set: data},
       {new: true}
     )
       .then(fitur => res.json(fitur))
       .catch(error => next(error))
   },
   insert: (req, res, next) => {
-    Fitur.create({...req.body})
+    const data = req.body
+    data.createdBy = req.user._id
+    Fitur.create({...data})
       .then(fitur => res.json(fitur))
       .catch(error => next(error))
   },
