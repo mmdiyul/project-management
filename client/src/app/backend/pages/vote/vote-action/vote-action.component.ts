@@ -1,3 +1,4 @@
+import { HelpersService } from './../../../../services/helpers.service';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserService } from './../../../../services/user.service';
@@ -18,24 +19,21 @@ export class VoteActionComponent implements OnInit {
     private fiturService: FiturService,
     private userService: UserService,
     public dialogRef: MatDialogRef<VoteActionComponent>,
-    @Inject(MAT_DIALOG_DATA) public md: any
+    @Inject(MAT_DIALOG_DATA) public md: any,
+    private helper: HelpersService
   ) {
     this.form = this.fb.group({
       kesulitan: ['', Validators.required],
       harga: ['', Validators.required],
-      userId: ['', Validators.required],
       fiturId: ['', Validators.required]
     });
     this.dialogTitle = 'Tambah Vote';
     this.fiturService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
       this.fiturList = results;
     });
-    this.userService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
-      this.userList = results;
-    });
     if (this.md.data) {
-      const { kesulitan, harga, userId, fiturId } = this.md.data;
-      this.form.setValue({kesulitan, harga, userId: userId._id, fiturId: fiturId._id});
+      const { kesulitan, harga, fiturId } = this.md.data;
+      this.form.setValue({kesulitan, harga, fiturId: fiturId._id});
       this.dialogTitle = 'Edit Vote untuk (' + fiturId.nama + ')';
     }
   }
@@ -45,7 +43,7 @@ export class VoteActionComponent implements OnInit {
   subs = new Subscription();
   dialogTitle = '';
   fiturList = [];
-  userList = [];
+  kesulitanList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   ngOnInit() {
   }

@@ -119,7 +119,7 @@ export class ReportBackendComponent implements OnInit {
         .pipe(takeUntil(this.unsubs))
         .subscribe(() => {
           this.getData();
-          this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
+          this.helper.sbSuccess(`Report berhasil ditambahkan`);
           // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
@@ -140,7 +140,7 @@ export class ReportBackendComponent implements OnInit {
         .pipe(takeUntil(this.unsubs))
         .subscribe(() => {
           this.getData();
-          this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
+          this.helper.sbSuccess(`Report berhasil diperbarui`);
           // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
@@ -155,7 +155,7 @@ export class ReportBackendComponent implements OnInit {
       if (result) {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
-          this.helper.sbSuccess(`${data[this.subject]} dihapus`);
+          this.helper.sbSuccess(`Report berhasil dihapus`);
           // console.log(`${data[this.subject]} dihapus`);
         }, err => {
           this.helper.sbError(err);

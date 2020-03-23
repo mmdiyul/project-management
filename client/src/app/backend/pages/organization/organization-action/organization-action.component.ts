@@ -21,7 +21,7 @@ export class OrganizationActionComponent implements OnInit {
       alamat: ['', Validators.required],
       telepon: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      website: ['', Validators.required]
+      website: ['']
     });
     if (this.md.data) {
       const { nama, alamat, telepon, email, website } = this.md.data;

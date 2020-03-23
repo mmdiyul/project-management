@@ -123,7 +123,7 @@ export class VoteBackendComponent implements OnInit {
         .pipe(takeUntil(this.unsubs))
         .subscribe(() => {
           this.getData();
-          this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
+          this.helper.sbSuccess(`Vote berhasil ditambahkan`);
           // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
@@ -144,7 +144,7 @@ export class VoteBackendComponent implements OnInit {
         .pipe(takeUntil(this.unsubs))
         .subscribe(() => {
           this.getData();
-          this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
+          this.helper.sbSuccess(`Vote berhasil diperbarui`);
           // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
@@ -159,7 +159,7 @@ export class VoteBackendComponent implements OnInit {
       if (result) {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
-          this.helper.sbSuccess(`${data[this.subject]} dihapus`);
+          this.helper.sbSuccess(`Vote berhasil dihapus`);
           // console.log(`${data[this.subject]} dihapus`);
         }, err => {
           this.helper.sbError(err);

@@ -1,9 +1,13 @@
-<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h1 mat-dialog-title class="mt-2">{{ this.dialogTitle }}</h1>
   <div mat-dialog-content>
     <mat-form-field class="w-100" appearance="outline">
       <mat-label>Kesulitan</mat-label>
-      <input matInput formControlName="kesulitan" placeholder="Kesulitan" type="number">
+      <mat-select formControlName="kesulitan">
+        <mat-option *ngFor="let index of kesulitanList" [value]="index">
+          {{ index }}
+        </mat-option>
+      </mat-select>
       <mat-error *ngIf="form.get('kesulitan').hasError('required')">
           Kesulitan wajib diisi
       </mat-error>
@@ -24,17 +28,6 @@
       </mat-select>
       <mat-error *ngIf="form.get('fiturId').hasError('required')">
         Fitur wajib diisi
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="w-100" appearance="outline">
-      <mat-label>User</mat-label>
-      <mat-select formControlName="userId">
-        <mat-option *ngFor="let user of userList" [value]="user._id">
-          {{ user.nama }}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.get('userId').hasError('required')">
-        User wajib diisi
       </mat-error>
     </mat-form-field>
   </div>

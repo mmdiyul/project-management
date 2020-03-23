@@ -24,8 +24,8 @@ export class FiturActionComponent implements OnInit {
       nama: ['', Validators.required],
       deskripsi: ['', Validators.required],
       waktuPengerjaan: ['', Validators.required],
-      kesulitan: ['', Validators.required],
-      estimasiHarga: ['', Validators.required],
+      kesulitan: [0],
+      estimasiHarga: [0],
       tipeId: ['', Validators.required],
       parent: [null]
     });

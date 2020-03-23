@@ -44,7 +44,7 @@
         </mat-error>
     </mat-form-field>
     <mat-form-field class="w-100" appearance="outline">
-      <mat-label>Organisasi</mat-label>
+      <mat-label>Organisasi (Optional)</mat-label>
       <mat-select formControlName="organizationId">
         <mat-option *ngFor="let organization of organizationList" [value]="organization._id">
           {{ organization.nama }}

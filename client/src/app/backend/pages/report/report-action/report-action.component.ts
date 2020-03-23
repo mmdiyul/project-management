@@ -22,19 +22,15 @@ export class ReportActionComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       pesan: ['', Validators.required],
-      userId: ['', Validators.required],
       fiturId: ['', Validators.required]
     });
     this.dialogTitle = 'Tambah Laporan';
     this.fiturService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
       this.fiturList = results;
     });
-    this.userService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
-      this.userList = results;
-    });
     if (this.md.data) {
-      const { pesan, userId, fiturId } = this.md.data;
-      this.form.setValue({pesan, userId: userId._id, fiturId: fiturId._id});
+      const { pesan, fiturId } = this.md.data;
+      this.form.setValue({pesan, fiturId: fiturId._id});
       this.dialogTitle = 'Edit Laporan untuk (' + fiturId.nama + ')';
     }
   }
@@ -44,7 +40,6 @@ export class ReportActionComponent implements OnInit {
   subs = new Subscription();
   dialogTitle = '';
   fiturList = [];
-  userList = [];
 
   ngOnInit() {
   }
