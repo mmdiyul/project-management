@@ -96,7 +96,7 @@ export class ReportBackendComponent implements OnInit {
 
   getData() {
     this.isLoadingResults = true;
-    this.services.getAll( this.searchForm.value, this.sortActive, this.sortDirection, this.offset, this.limit )
+    this.services.getAll( this.searchForm.get('search').value, this.sortActive, this.sortDirection, this.offset, this.limit, this.page )
       .subscribe(({count, results}) => {
         this.dataSource = results;
         this.resultsLength = count;

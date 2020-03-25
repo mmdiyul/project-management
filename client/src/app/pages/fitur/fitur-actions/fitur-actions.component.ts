@@ -27,8 +27,8 @@ export class FiturActionsComponent implements OnInit {
       nama: ['', Validators.required],
       deskripsi: ['', Validators.required],
       waktuPengerjaan: ['', Validators.required],
-      kesulitan: ['', Validators.required],
-      estimasiHarga: ['', Validators.required],
+      kesulitan: [0],
+      estimasiHarga: [0],
       tipeId: ['', Validators.required],
       parent: [null]
     });
@@ -46,40 +46,40 @@ export class FiturActionsComponent implements OnInit {
     // }
   }
 
-    dataSource = [];
-    countDataSearch = 0;
-    isLoadingResults = true;
-    resultsLength = 0;
-    form: FormGroup;
-    subject = new Subject();
-    subs = new Subscription();
-    dialogTitle = '';
-    fiturList = [];
-    tipeList = [];
+  dataSource = [];
+  countDataSearch = 0;
+  isLoadingResults = true;
+  resultsLength = 0;
+  form: FormGroup;
+  subject = new Subject();
+  subs = new Subscription();
+  dialogTitle = '';
+  fiturList = [];
+  tipeList = [];
 
-    ngOnInit() {
-      this.getData();
+  ngOnInit() {
+    this.getData();
+  }
+
+  onSubmit() {
+    this.fiturService.insert(this.form.value).pipe(takeUntil(this.subject)).subscribe(results => {
+      this.form.reset();
+      const route = '/fitur';
+      this.router.navigate([route]);
+    });
     }
 
-    onSubmit() {
-      this.fiturService.insert(this.form.value).pipe(takeUntil(this.subject)).subscribe(results => {
-        this.form.reset();
-        const route = '/fitur';
-        this.router.navigate([route]);
+  getData() {
+    this.isLoadingResults = true;
+    this.fiturService.getAll()
+      .subscribe(({count, results}) => {
+        this.dataSource = results;
+        this.resultsLength = count;
+        this.isLoadingResults = false;
+        this.countDataSearch = results.length;
+      }, (err) => {
+        this.isLoadingResults = false;
+        console.log(err);
       });
-      }
-
-      getData() {
-        this.isLoadingResults = true;
-        this.fiturService.getAll()
-          .subscribe(({count, results}) => {
-            this.dataSource = results;
-            this.resultsLength = count;
-            this.isLoadingResults = false;
-            this.countDataSearch = results.length;
-          }, (err) => {
-            this.isLoadingResults = false;
-            console.log(err);
-          });
-        }
+    }
 }

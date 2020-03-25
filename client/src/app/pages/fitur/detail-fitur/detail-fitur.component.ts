@@ -1,5 +1,8 @@
+import { HelpersService } from './../../../services/helpers.service';
+import { User } from './../../../services/user';
 import { VoteService } from './../../../services/vote.service';
 import { Fitur } from 'src/app/services/fitur';
+import { Vote } from 'src/app/services/vote';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FiturService } from './../../../services/fitur.service';
@@ -14,29 +17,39 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class DetailFiturComponent implements OnInit {
   dataSource: Fitur;
+  voteData: Vote[];
 
   constructor(
     private fb: FormBuilder,
     private fiturService: FiturService,
     private voteService: VoteService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private helper: HelpersService
   ) {
+    this.currentUser = this.helper.currentUser();
+    if (this.currentUser) {
+      this.userId = this.currentUser._id;
+    }
     this.form = this.fb.group({
-      waktuPengerjaan: ['', Validators.required],
-      estimasiHarga: ['', Validators.required]
+      kesulitan: ['', Validators.required],
+      harga: ['', Validators.required],
+      fiturId: [null]
     });
    }
 
+  currentUser: User;
+  userId: string;
   private subs = new Subject();
   id: string;
   form: FormGroup;
   subject = new Subject();
+  kesulitanList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  checkVote = true;
 
   ngOnInit() {
     this.route.params.pipe(takeUntil(this.subs)).subscribe(params => {
       this.id = params.id;
-      console.log(this.id);
       this.getData();
     });
   }
@@ -49,15 +62,31 @@ export class DetailFiturComponent implements OnInit {
       .pipe(takeUntil(this.subs))
       .subscribe((fitur) => {
         this.dataSource = fitur;
-        console.log(this.dataSource);
+      });
+    this.voteService.getAllNoLimit()
+      .subscribe(({results}) => {
+        this.voteData = results;
+        this.voteData.forEach(element => {
+          if (this.currentUser) {
+            if (element.fiturId._id === this.id && element.userId._id === this.userId) {
+              this.checkVote = false;
+            }
+          }
+        });
       });
   }
   onSubmit() {
-    this.voteService.insert(this.form.value).pipe(takeUntil(this.subject)).subscribe(results => {
-      console.log(this.form.value);
-      this.form.reset();
-      const route = '/fitur';
-      this.router.navigate([route]);
-    });
+    this.form.controls.fiturId.setValue(this.id);
+    this.voteService.insert(this.form.value)
+    .pipe(takeUntil(this.subs))
+      .subscribe(() => {
+        this.form.reset();
+        const route = '/fitur';
+        this.router.navigate([route]);
+        this.getData();
+        this.helper.sbSuccess(`Vote berhasil ditambahkan`);
+      }, err => {
+        this.helper.sbError(err);
+      });
   }
 }

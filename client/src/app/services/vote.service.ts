@@ -26,6 +26,10 @@ export class VoteService {
     }
     return this.http.get<VoteAPI>(url, { params });
   }
+  getAllNoLimit() {
+    const url = this.firstEndpoint;
+    return this.http.get<VoteAPI>(url);
+  }
   insert(data: Vote) {
     const url = this.firstEndpoint;
     return this.http.post<Vote>(url, data);

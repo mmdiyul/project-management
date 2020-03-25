@@ -27,13 +27,13 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Waktu Pengerjaan</mat-label>
-              <input matInput formControlName="waktuPengerjaan" placeholder="Waktu Pengerjaan" type="number">
+              <mat-label>Waktu Pengerjaan (Hari)</mat-label>
+              <input matInput formControlName="waktuPengerjaan" placeholder="Waktu Pengerjaan (Hari)" type="number">
               <mat-error *ngIf="form.get('waktuPengerjaan').hasError('required')">
                 Waktu pengerjaan wajib diisi
               </mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100" appearance="outline">
+            <!-- <mat-form-field class="w-100" appearance="outline">
               <mat-label>Tingkat Kesulitan</mat-label>
               <input matInput formControlName="kesulitan" placeholder="Tingkat Kesulitan" type="number">
               <mat-error *ngIf="form.get('kesulitan').hasError('required')">
@@ -46,7 +46,7 @@
               <mat-error *ngIf="form.get('estimasiHarga').hasError('required')">
                 Estimasi harga wajib diisi
               </mat-error>
-            </mat-form-field>
+            </mat-form-field> -->
             <mat-form-field class="w-100" appearance="outline">
               <mat-label>Tipe</mat-label>
               <mat-select formControlName="tipeId">
@@ -56,7 +56,7 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Parent Fitur</mat-label>
+              <mat-label>Parent Fitur (Optional)</mat-label>
               <mat-select formControlName="parent">
                 <mat-option *ngFor="let fitur of fiturList" [value]="fitur._id">
                   {{ fitur.nama }}
@@ -76,7 +76,7 @@
     <div class="sidebar">
 
       <!-- Side Widget -->
-      <div class="card my-4">
+      <!-- <div class="card my-4">
         <h5 class="card-header">Explore Feature</h5>
         <div class="card-body">
           <ul class="list-unstyled mb-0">
@@ -91,9 +91,9 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
 
-      <div class="card my-4">
+      <!-- <div class="card my-4">
         <h5 class="card-header">Your Feature</h5>
         <div class="card-body">
           <ul class="list-unstyled mb-0">
@@ -102,7 +102,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
 
     </div>
     </div>

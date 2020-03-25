@@ -1,3 +1,5 @@
+import { MyPipesModule } from './../../my-pipes/my-pipes.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListFiturComponent } from './list-fitur.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,6 +9,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { Routes, RouterModule } from '@angular/router';
 import { DetailFiturComponent } from 'src/app/pages/fitur/detail-fitur/detail-fitur.component';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -16,14 +19,20 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ListFiturComponent],
+  declarations: [
+    ListFiturComponent,
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
     MatPaginatorModule,
     MatProgressBarModule,
     MatCardModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    MyPipesModule
   ],
   exports: [
     ListFiturComponent

@@ -25,8 +25,12 @@ export class FiturService {
     }
     return this.http.get<FiturAPI>(url, { params });
   }
+  getAllNoLimit() {
+    const url = this.firstEndpoint;
+    return this.http.get<FiturAPI>(url);
+  }
   getById(id: string) {
-    const url = `${this.endpoint}/${id}`;
+    const url = `${this.firstEndpoint}/${id}`;
     return this.http.get<Fitur>(url);
   }
   insert(data: Fitur) {

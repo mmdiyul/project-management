@@ -8,38 +8,6 @@ import { Subject } from 'rxjs';
 import { FiturService } from './../../../services/fitur.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-// export interface PeriodicElement {
-//   nama: string;
-//   deskripsi: string;
-//   waktu_pengerjaan: string;
-//   kesulitan: number;
-//   estimasi_harga: number;
-// }
-
-// const data: PeriodicElement[] = [
-//   {
-//     nama: 'Login',
-//     deskripsi: 'Lorem, ipsum dolor sit amet.',
-//     waktu_pengerjaan: '14 Hari',
-//     kesulitan: 6,
-//     estimasi_harga: 250000
-//   },
-//   {
-//     nama: 'Login',
-//     deskripsi: 'Lorem, ipsum dolor sit amet.',
-//     waktu_pengerjaan: '14 Hari',
-//     kesulitan: 6,
-//     estimasi_harga: 250000
-//   },
-//   {
-//     nama: 'Login',
-//     deskripsi: 'Lorem, ipsum dolor sit amet.',
-//     waktu_pengerjaan: '14 Hari',
-//     kesulitan: 6,
-//     estimasi_harga: 250000
-//   },
-// ];
-
 @Component({
   selector: 'app-fitur',
   templateUrl: './fitur.component.html',
@@ -104,7 +72,7 @@ export class FiturBackendComponent implements OnInit {
 
   getData() {
     this.isLoadingResults = true;
-    this.services.getAll( this.searchForm.get('search').value, this.sortActive, this.sortDirection, this.offset, this.limit, this.page )
+    this.services.getAll(this.searchForm.get('search').value, this.sortActive, this.sortDirection, this.offset, this.limit, this.page)
       .subscribe(({count, results}) => {
         this.dataSource = results;
         this.resultsLength = count;

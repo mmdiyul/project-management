@@ -13,8 +13,7 @@
       <div class="card mb-3 col-md mt-2 bg-light fitur" *ngIf="dataSource">
         <div class="row no-gutters">
           <div class="col-md">
-            <h5 class="text-center" *ngIf="dataSource.nama"> {{dataSource.nama}} </h5>
-            <svg class="bd-placeholder-img justify-items-center mt-1" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
+            <h5 class="text-center"> {{dataSource.nama}} </h5>
             <div class="card-body">
               <div class="row">
                 <table class="table table-borderless">
@@ -22,7 +21,7 @@
                     <tr>
                       <th scope="row"><p class="card-text">Authors</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text" *ngIf="dataSource.createdBy">{{dataSource.createdBy}}</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.createdBy">{{dataSource.createdBy.nama}}</p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Deskripsi</p></th>
@@ -32,17 +31,17 @@
                     <tr>
                       <th scope="row"><p class="card-text">Tipe</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text" *ngIf="dataSource.tipeId">{{dataSource.tipeId}}</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.tipeId">{{dataSource.tipeId.nama}}</p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Waktu Pengerjaan</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text" *ngIf="dataSource.waktuPengerjaan">{{dataSource.waktuPengerjaan}}</p></td>
+                      <td><p class="card-text" *ngIf="dataSource.waktuPengerjaan">{{dataSource.waktuPengerjaan}} <span *ngIf="dataSource.waktuPengerjaan">Hari</span></p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Kesulitan</p></th>
                       <td><p class="card-text">:</p></td>
-                      <td><p class="card-text"><mat-progress-bar class="mt-2" mode="determinate" value="{{dataSource.kesulitan}}" *ngIf="dataSource.kesulitan"></mat-progress-bar></p></td>
+                      <td><p class="card-text"><mat-progress-bar class="mt-2" mode="determinate" value="{{dataSource.kesulitan * 10}}" *ngIf="dataSource.kesulitan"></mat-progress-bar></p></td>
                     </tr>
                     <tr>
                       <th scope="row"><p class="card-text">Estimasi Harga</p></th>
@@ -57,27 +56,37 @@
         </div>
       </div>
       <div class="card my-4">
-        <h5 class="card-header">Explore Feature</h5>
-        <div class="card-body">
+        <h5 class="card-header">Vote Fitur</h5>
+        <div class="card-body" *ngIf="!checkVote">
+          <i>Anda telah melakukan vote pada fitur ini.</i>
+        </div>
+        <div class="card-body" *ngIf="!currentUser">
+          <i>Silakan login terlebih dahulu untuk dapat memberikan vote.</i>
+        </div>
+        <div class="card-body" *ngIf="checkVote && currentUser">
           <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
             <mat-form-field class="w-100" appearance="outline">
-              <mat-label>Waktu Pengerjaan</mat-label>
-              <input matInput formControlName="waktuPengerjaan" placeholder="Waktu Pengerjaan" type="number">
-              <mat-error *ngIf="form.get('waktuPengerjaan').hasError('required')">
-                Waktu pengerjaan wajib diisi
+              <mat-label>Kesulitan</mat-label>
+              <mat-select formControlName="kesulitan">
+                <mat-option *ngFor="let index of kesulitanList" [value]="index">
+                  {{ index }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="form.get('kesulitan').hasError('required')">
+                  Kesulitan wajib diisi
               </mat-error>
             </mat-form-field>
             <mat-form-field class="w-100" appearance="outline">
               <mat-label>Estimasi Harga</mat-label>
-              <input matInput formControlName="estimasiHarga" placeholder="Estimasi Harga" type="number">
-              <mat-error *ngIf="form.get('estimasiHarga').hasError('required')">
+              <input matInput formControlName="harga" placeholder="Harga" type="number">
+              <mat-error *ngIf="form.get('harga').hasError('required')">
                 Estimasi harga wajib diisi
               </mat-error>
             </mat-form-field>
-        </form>
-          <mat-card-actions class="m-0">
-            <button mat-raised-button class="mx-auto mt-1 btn btn-block" color="primary" type="submit" [disabled]="form.invalid">VOTE</button>
-          </mat-card-actions>
+            <mat-card-actions class="m-0">
+              <button mat-raised-button class="mx-auto mt-1 btn btn-block" color="primary" type="submit" [disabled]="form.invalid">VOTE</button>
+            </mat-card-actions>
+          </form>
         </div>
       </div>
 
@@ -85,45 +94,44 @@
 
     <!-- Sidebar Widgets Column -->
     <div class="col-md-4">
-    <div class="sidebar">
+      <!-- <div class="sidebar">
 
-      <!-- Side Widget -->
-      <div class="card my-4">
-        <h5 class="card-header">Explore Feature</h5>
-        <div class="card-body">
-          <ul class="list-unstyled mb-0">
+        <div class="card my-4">
+          <h5 class="card-header">Explore Feature</h5>
+          <div class="card-body">
+            <ul class="list-unstyled mb-0">
 
-            <li>
-              <a href="#">Login</a>
-            </li>
-            <li>
-              <a href="#">Landing Page</a>
-            </li>
-            <li>
-              <a href="#">Register</a>
-            </li>
-          </ul>
+              <li>
+                <a href="#">Login</a>
+              </li>
+              <li>
+                <a href="#">Landing Page</a>
+              </li>
+              <li>
+                <a href="#">Register</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="card my-4">
-        <h5 class="card-header">Your Feature</h5>
-        <div class="card-body">
-          <ul class="list-unstyled mb-0">
-            <li class="mt-2">
-              <a href="#">Login</a>
-            </li>
-            <li>
-              <a href="#">Landing Page</a>
-            </li>
-            <li>
-              <a href="#">Register</a>
-            </li>
-          </ul>
+        <div class="card my-4">
+          <h5 class="card-header">Your Feature</h5>
+          <div class="card-body">
+            <ul class="list-unstyled mb-0">
+              <li class="mt-2">
+                <a href="#">Login</a>
+              </li>
+              <li>
+                <a href="#">Landing Page</a>
+              </li>
+              <li>
+                <a href="#">Register</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-    </div>
+      </div> -->
     </div>
 
   </div>

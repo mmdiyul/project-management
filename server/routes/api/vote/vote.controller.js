@@ -10,7 +10,7 @@ module.exports = {
       offset = (limit * page) - limit
     }
     const count = Vote.countDocuments(where)
-    const data = Vote.find(where).limit(limit).skip(offset).sort(sort).select('-__v')
+    const data = Vote.find(where).limit(limit).skip(offset).sort(sort)
     .populate('userId', 'nama')
     .populate('fiturId', 'nama waktuPengerjaan kesulitan estimasiHarga')
 

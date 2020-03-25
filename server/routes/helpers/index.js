@@ -25,7 +25,7 @@ exports.parseWhere = (where, i )=>{
 }
 exports.query = (query) =>{
     let where = {};
-    let limit = 5;
+    let limit = 0;
     let offset = 0;
     let sort = { '_id': -1 };
     if(query.where) where = this.parseWhere(query.where, query.i);

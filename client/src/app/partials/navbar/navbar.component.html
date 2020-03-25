@@ -32,7 +32,7 @@
         <li class="nav-item" *ngIf="!currentUser" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/login']" (click)="isMenuCollapsed = true"><strong>Login</strong></a>
         </li>
-        <li class="nav-item d-flex align-items-center">
+        <li *ngIf="currentUser" class="nav-item d-flex align-items-center">
           <span class="text-white">{{ this.currentUser.nama }}</span>
         </li>
         <a *ngIf="currentUser" class="ml-auto text-white btn btn-sm d-flex justify-content-center align-items-center" (click)="logout()">
