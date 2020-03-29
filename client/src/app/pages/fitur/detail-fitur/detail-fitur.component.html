@@ -6,11 +6,8 @@
     <!-- Blog Entries Column -->
     <div class="col-md-8">
 
-      <h2 class="my-4">Detail Fitur
-      </h2>
-
       <!-- Blog Post -->
-      <div class="card mb-3 col-md mt-2 bg-light fitur" *ngIf="dataSource">
+      <div class="card mb-3 mt-4 col-md mt-2 bg-light fitur" *ngIf="dataSource">
         <div class="row no-gutters">
           <div class="col-md">
             <h5 class="text-center"> {{dataSource.nama}} </h5>
@@ -55,6 +52,11 @@
           </div>
         </div>
       </div>
+
+    </div>
+
+    <!-- Sidebar Widgets Column -->
+    <div class="col-md-4">
       <div class="card my-4">
         <h5 class="card-header">Vote Fitur</h5>
         <div class="card-body" *ngIf="!checkVote">
@@ -89,53 +91,15 @@
           </form>
         </div>
       </div>
-
-    </div>
-
-    <!-- Sidebar Widgets Column -->
-    <div class="col-md-4">
-      <!-- <div class="sidebar">
-
-        <div class="card my-4">
-          <h5 class="card-header">Explore Feature</h5>
-          <div class="card-body">
-            <ul class="list-unstyled mb-0">
-
-              <li>
-                <a href="#">Login</a>
-              </li>
-              <li>
-                <a href="#">Landing Page</a>
-              </li>
-              <li>
-                <a href="#">Register</a>
-              </li>
-            </ul>
-          </div>
+      <div class="card my-4" *ngIf="mine">
+        <h5 class="card-header">Action</h5>
+        <div class="card-body">
+            <button mat-flat-button class="btn-block btn-primary" (click)="edit(dataSource)">Edit Fitur</button>
+            <button mat-flat-button class="btn-block btn-danger" (click)="remove(dataSource)">Hapus Fitur</button>
         </div>
-
-        <div class="card my-4">
-          <h5 class="card-header">Your Feature</h5>
-          <div class="card-body">
-            <ul class="list-unstyled mb-0">
-              <li class="mt-2">
-                <a href="#">Login</a>
-              </li>
-              <li>
-                <a href="#">Landing Page</a>
-              </li>
-              <li>
-                <a href="#">Register</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-      </div> -->
+      </div>
     </div>
 
   </div>
-  <!-- /.row -->
 
 </div>
-<!-- /.container -->

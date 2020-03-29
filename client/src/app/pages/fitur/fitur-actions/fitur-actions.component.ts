@@ -39,11 +39,6 @@ export class FiturActionsComponent implements OnInit {
     this.tipeService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
       this.tipeList = results;
     });
-    // if (this.md.data) {
-    //   const { nama, deskripsi, waktuPengerjaan, kesulitan, estimasiHarga, tipeId, parent } = this.md.data;
-    //   this.form.setValue({ nama, deskripsi, waktuPengerjaan, kesulitan, estimasiHarga, tipeId, parent });
-    //   this.dialogTitle = 'Edit Fitur (' + nama + ')';
-    // }
   }
 
   dataSource = [];

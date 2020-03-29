@@ -59,19 +59,17 @@
         <div class="card my-4" *ngIf="currentUser">
           <h5 class="card-header">Fitur Saya</h5>
           <div class="card-body">
-            <ul class="list-unstyled mb-0">
-              <li>
-                <mat-card-actions class="m-0">
-                  <a [routerLink]="['/fitur-action']"><button mat-flat-button class="btn-block btn-primary">Tambah Fitur</button></a>
-                </mat-card-actions>
-              </li>
-              <hr/>
+            <mat-card-actions class="m-0">
+              <a [routerLink]="['/fitur/fitur-action']"><button mat-flat-button class="btn-block btn-primary">Tambah Fitur</button></a>
+            </mat-card-actions>
+            <hr/>
+            <ol>
               <li *ngFor="let item of fiturSaya">
-                <a [routerLink]="['/fitur/detail', item._id]">
+                <a [routerLink]="['/fitur/detail', item._id]" class="text-dark" style="font-weight: 500;">
                   {{item.nama}}
                 </a>
               </li>
-            </ul>
+            </ol>
           </div>
         </div>
       </div>

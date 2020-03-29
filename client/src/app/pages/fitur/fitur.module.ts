@@ -12,6 +12,7 @@ import { ListFiturComponent } from 'src/app/partials/list-fitur/list-fitur.compo
 import { MatSliderModule, MatFormFieldModule, MatLabel, MatInputModule, MatSelectModule, MatDialogModule } from '@angular/material';
 import { FiturActionsComponent } from './fitur-actions/fitur-actions.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditComponent } from './detail-fitur/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [FiturComponent, DetailFiturComponent, FiturActionsComponent],
+  declarations: [FiturComponent, DetailFiturComponent, FiturActionsComponent, EditComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -51,6 +52,9 @@ const routes: Routes = [
   ],
   exports: [
     FiturComponent
+  ],
+  entryComponents: [
+    EditComponent
   ]
 })
 export class FiturModule {  }
