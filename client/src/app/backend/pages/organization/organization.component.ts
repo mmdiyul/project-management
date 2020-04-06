@@ -8,38 +8,6 @@ import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { OrganizationService } from './../../../services/organization.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-// export interface PeriodicElement {
-//   nama: string;
-//   alamat: string;
-//   telepon: string;
-//   email: string;
-//   website: string;
-// }
-
-// const data: PeriodicElement[] = [
-//   {
-//     nama: 'Profile Image Studio',
-//     alamat: 'Jl Akordion G/8',
-//     telepon: '082234659383',
-//     email: 'profile@profileimage.studio',
-//     website: 'https://profileimage.studio'
-//   },
-//   {
-//     nama: 'Profile Image Studio',
-//     alamat: 'Jl Akordion G/8',
-//     telepon: '082234659383',
-//     email: 'profile@profileimage.studio',
-//     website: 'https://profileimage.studio'
-//   },
-//   {
-//     nama: 'Profile Image Studio',
-//     alamat: 'Jl Akordion G/8',
-//     telepon: '082234659383',
-//     email: 'profile@profileimage.studio',
-//     website: 'https://profileimage.studio'
-//   },
-// ];
-
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
@@ -128,10 +96,8 @@ export class OrganizationBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
-          // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -149,10 +115,8 @@ export class OrganizationBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
-          // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -164,10 +128,8 @@ export class OrganizationBackendComponent implements OnInit {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${data[this.subject]} dihapus`);
-          // console.log(`${data[this.subject]} dihapus`);
         }, err => {
-         this.helper.sbError(err);
-          // console.log(err);
+          this.helper.sbError(err);
         });
       }
     });

@@ -8,38 +8,6 @@ import { Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { RemoveDialogComponent } from '../../partials/remove-dialog/remove-dialog.component';
 
-// export interface PeriodicElement {
-//   nama: string;
-//   username: string;
-//   email: string;
-//   role: string;
-//   organisasi: string;
-// }
-
-// const data: PeriodicElement[] = [
-//   {
-//     nama: 'Muhammad Aliyul Murtadlo',
-//     username: 'mmdiyul',
-//     email: 'muhammadaliyulm@gmail.com',
-//     role: 'Super Admin',
-//     organisasi: 'Profile Image Studio'
-//   },
-//   {
-//     nama: 'Muhammad Aliyul Murtadlo',
-//     username: 'mmdiyul',
-//     email: 'muhammadaliyulm@gmail.com',
-//     role: 'Super Admin',
-//     organisasi: 'Profile Image Studio'
-//   },
-//   {
-//     nama: 'Muhammad Aliyul Murtadlo',
-//     username: 'mmdiyul',
-//     email: 'muhammadaliyulm@gmail.com',
-//     role: 'Super Admin',
-//     organisasi: 'Profile Image Studio'
-//   },
-// ];
-
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -128,10 +96,8 @@ export class UserBackendComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
-          // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -149,10 +115,8 @@ export class UserBackendComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
-          // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -164,10 +128,8 @@ export class UserBackendComponent implements OnInit, OnDestroy, AfterViewInit {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${data[this.subject]} dihapus`);
-          // console.log(`${data[this.subject]} dihapus`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });

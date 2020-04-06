@@ -8,34 +8,6 @@ import { VoteService } from './../../../services/vote.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HelpersService } from 'src/app/services/helpers.service';
 
-// export interface PeriodicElement {
-//   fitur: string;
-//   kesulitan: number;
-//   harga: number;
-//   user: string;
-// }
-
-// const data: PeriodicElement[] = [
-//   {
-//     fitur: 'Daftar dengan Google',
-//     kesulitan: 7,
-//     harga: 100000,
-//     user: 'Test User'
-//   },
-//   {
-//     fitur: 'Daftar dengan Google',
-//     kesulitan: 7,
-//     harga: 100000,
-//     user: 'Test User'
-//   },
-//   {
-//     fitur: 'Daftar dengan Google',
-//     kesulitan: 7,
-//     harga: 100000,
-//     user: 'Test User'
-//   },
-// ];
-
 @Component({
   selector: 'app-vote',
   templateUrl: './vote.component.html',
@@ -124,10 +96,8 @@ export class VoteBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`Vote berhasil ditambahkan`);
-          // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -145,10 +115,8 @@ export class VoteBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`Vote berhasil diperbarui`);
-          // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -160,10 +128,8 @@ export class VoteBackendComponent implements OnInit {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`Vote berhasil dihapus`);
-          // console.log(`${data[this.subject]} dihapus`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });

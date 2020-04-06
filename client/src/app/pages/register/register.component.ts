@@ -38,18 +38,6 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     }
-    // this.dialogTitle = 'Tambah Pengguna';
-    // this.rolesService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
-    //   this.rolesList = results;
-    // });
-    // this.organizationService.getAll().pipe(takeUntil(this.subject)).subscribe(({results}) => {
-    //   this.organizationList = results;
-    // });
-    // if (this.md.data) {
-    //   const { nama, username, email, password, roleId, organizationId } = this.md.data;
-    //   this.form.setValue({nama, username, email, password, roleId: roleId._id, organizationId: organizationId ? organizationId._id : null});
-    //   this.dialogTitle = 'Edit Pengguna (' + nama + ')';
-    // }
   }
 
   form: FormGroup;

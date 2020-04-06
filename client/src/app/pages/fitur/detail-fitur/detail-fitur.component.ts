@@ -112,10 +112,8 @@ export class DetailFiturComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
-          // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -128,10 +126,8 @@ export class DetailFiturComponent implements OnInit {
           this.getData();
           this.helper.sbSuccess(`${data[this.subject]} dihapus`);
           this.router.navigate(['/fitur']);
-          // console.log(`${data[this.subject]} dihapus`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });

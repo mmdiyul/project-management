@@ -8,30 +8,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 
-// export interface PeriodicElement {
-//   nama: string;
-//   deskripsi: string;
-//   prioritas: number;
-// }
-
-// const data: PeriodicElement[] = [
-//   {
-//     nama: 'Super Admin',
-//     deskripsi: 'Lorem, ipsum dolor sit amet.',
-//     prioritas: 1
-//   },
-//   {
-//     nama: 'Admin',
-//     deskripsi: 'Lorem, ipsum dolor sit amet.',
-//     prioritas: 2
-//   },
-//   {
-//     nama: 'User',
-//     deskripsi: 'Lorem, ipsum dolor sit amet.',
-//     prioritas: 3
-//   }
-// ];
-
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
@@ -120,10 +96,8 @@ export class RoleBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
-          // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -141,10 +115,8 @@ export class RoleBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
-          // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -156,10 +128,8 @@ export class RoleBackendComponent implements OnInit {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${data[this.subject]} dihapus`);
-          // console.log(`${data[this.subject]} dihapus`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });

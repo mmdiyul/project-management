@@ -8,30 +8,6 @@ import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { ReportService } from '../../../services/report.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-// export interface PeriodicElement {
-//   fitur: string;
-//   pesan: string;
-//   user: string;
-// }
-
-// const data: PeriodicElement[] = [
-//   {
-//     fitur: 'Daftar dengan Google',
-//     pesan: 'Ada fitur lain yang sama',
-//     user: 'Test User'
-//   },
-//   {
-//     fitur: 'Daftar dengan Google',
-//     pesan: 'Ada fitur lain yang sama',
-//     user: 'Test User'
-//   },
-//   {
-//     fitur: 'Daftar dengan Google',
-//     pesan: 'Ada fitur lain yang sama',
-//     user: 'Test User'
-//   },
-// ];
-
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -120,10 +96,8 @@ export class ReportBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`Report berhasil ditambahkan`);
-          // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -141,10 +115,8 @@ export class ReportBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`Report berhasil diperbarui`);
-          // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });

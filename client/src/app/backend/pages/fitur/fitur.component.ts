@@ -96,10 +96,8 @@ export class FiturBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} ditambahkan`);
-          // console.log(`${result[this.subject]} ditambahkan`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -117,10 +115,8 @@ export class FiturBackendComponent implements OnInit {
         .subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${result[this.subject]} diperbarui`);
-          // console.log(`${result[this.subject]} diperbarui`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
@@ -132,10 +128,8 @@ export class FiturBackendComponent implements OnInit {
         this.services.removeById(data._id).pipe(takeUntil(this.unsubs)).subscribe(() => {
           this.getData();
           this.helper.sbSuccess(`${data[this.subject]} dihapus`);
-          // console.log(`${data[this.subject]} dihapus`);
         }, err => {
           this.helper.sbError(err);
-          // console.log(err);
         });
       }
     });
