@@ -80,7 +80,9 @@ module.exports = {
   },
   insert: (req, res, next) => {
     const data = req.body
-    data.createdBy = req.user._id
+    if (req.user != null) {
+      data.createdBy = req.user._id
+    }
     const newUser = createNewUser(data)
     newUser
       .then(user => res.json(user))
