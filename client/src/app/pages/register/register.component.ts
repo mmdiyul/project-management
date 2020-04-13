@@ -1,3 +1,4 @@
+import { RolesService } from './../../services/roles.service';
 import { User } from 'src/app/services/user';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private roleService: RolesService,
     private router: Router,
     private helper: HelpersService
     // public dialogRef: MatDialogRef<UserActionsComponent>,
@@ -28,7 +30,8 @@ export class RegisterComponent implements OnInit {
       nama: ['', Validators.required],
       username: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      roleId: [null]
     });
     this.currentUser = this.helper.currentUser();
     if (this.currentUser !== null) {
@@ -44,11 +47,13 @@ export class RegisterComponent implements OnInit {
   subject = new Subject();
   subs = new Subscription();
   rolesList = [];
-  organizationList = [];
   dialogTitle = '';
   currentUser: User;
 
   ngOnInit() {
+    this.roleService.getAll('developer').subscribe(({results}) => {
+      this.rolesList = results;
+    });
   }
 
   ngOnDestroy() {
@@ -56,6 +61,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.form.controls.roleId.setValue(this.rolesList[0]._id);
     this.userService.insert(this.form.value).pipe(takeUntil(this.subject)).subscribe(results => {
       this.form.reset();
       const route = '/login';
